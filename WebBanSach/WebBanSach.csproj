@@ -134,6 +134,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Authentication\CustomRoleProvider.cs" />
     <Compile Include="Book.cs">
       <DependentUpon>WebBanSach.tt</DependentUpon>
     </Compile>
@@ -184,6 +185,9 @@
       <DependentUpon>WebBanSach.tt</DependentUpon>
     </Compile>
     <Compile Include="LaySach_Result.cs">
+      <DependentUpon>WebBanSach.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LayUser_Result.cs">
       <DependentUpon>WebBanSach.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ItemGioHang.cs" />

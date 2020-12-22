@@ -10,16 +10,9 @@
 namespace WebBanSach
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class User
+    public partial class LayUser_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
-        {
-            this.Orders = new HashSet<Order>();
-        }
-    
         public int ID_User { get; set; }
         public string First_Name { get; set; }
         public string Last_Name { get; set; }
@@ -31,8 +24,5 @@ namespace WebBanSach
         public string UserName { get; set; }
         public string PassWd { get; set; }
         public Nullable<int> Permisson { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
     }
 }

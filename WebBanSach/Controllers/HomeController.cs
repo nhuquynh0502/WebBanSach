@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using WebBanSach.ViewModels;
 
 namespace WebBanSach.Controllers
@@ -10,6 +11,9 @@ namespace WebBanSach.Controllers
     public class HomeController : Controller
     {
         private WebBanSachEntities webBanSach = new WebBanSachEntities();
+
+        public object ID_User { get; private set; }
+
         public ActionResult Index()
         {
             return View();
@@ -26,6 +30,7 @@ namespace WebBanSach.Controllers
                 return View("TrangQuanLySach");
             }
         }
+        [Authorize(Roles = "Admin")]
         public ActionResult TrangQuanLySach()
         {
             
@@ -39,6 +44,7 @@ namespace WebBanSach.Controllers
                 return View("TrangQuanLySach");
             }
         }
+        [Authorize(Roles ="Admin")]
         [HttpPost]
         public ActionResult TrangQuanLySach(string chuoi)
         {
@@ -101,6 +107,7 @@ namespace WebBanSach.Controllers
                 return View("TrangSachNgonTinh");
             }
         }
+        [Authorize(Roles = "Admin")]
         public ActionResult TrangThemSach()
         {
             ThemSachViewModel themSach = new ThemSachViewModel();
@@ -110,6 +117,7 @@ namespace WebBanSach.Controllers
 
             return View(themSach);
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult TrangThemSach(Book book)
         {
@@ -128,6 +136,7 @@ namespace WebBanSach.Controllers
                                     book.ID_Provider);
             return View();
         }
+        [Authorize(Roles = "Admin")]
         public ActionResult TrangSuaSach(int id)
         {
             SuaSachViewModel suaSach = new SuaSachViewModel();
@@ -138,6 +147,7 @@ namespace WebBanSach.Controllers
 
             return View(suaSach);
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult TrangSuaSach(Book book)
         {
@@ -157,7 +167,7 @@ namespace WebBanSach.Controllers
                                     book.ID_Provider);
             return RedirectToAction("TrangQuanLySach");
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult XoaSach(int id)
         {
@@ -189,15 +199,34 @@ namespace WebBanSach.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult DangNhap(string userName)
+        public ActionResult DangNhap(User user)
         {
-            webBanSach.getdangnhap(userName);
-            return RedirectToAction("TrangNguoiDung");
-        }
-        public ActionResult KiemTraDangNhap(string userName, string pass)
-        {
-            //var data = webBanSach.dangnha;
-            return View();
+            var data = webBanSach.LayUser(user.UserName, user.PassWd).FirstOrDefault();
+            if(data == null)
+            {
+                return View();
+            }
+            else
+            {
+                if(HttpContext.User.Identity.IsAuthenticated)
+                {
+                    FormsAuthentication.SignOut();
+                }
+
+                //FormsAuthentication.SignOut();
+                FormsAuthentication.SetAuthCookie(data.ID_User.ToString(), true);
+                Session["UserLogin"] = new User { ID_User = data.ID_User};
+                var quyen = webBanSach.LayQuyenUser(data.ID_User).ToList().FirstOrDefault();
+                if(quyen == 1)
+                {
+                    return RedirectToAction("TrangNguoiDung");
+                }
+                else if(quyen == 2)
+                {
+                    return RedirectToAction("TrangQuanLySach");
+                }
+                return View();
+            }
         }
     }
 }

@@ -454,5 +454,27 @@ namespace WebBanSach
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Book>("LaySach1", mergeOption, iD_BookParameter);
         }
+    
+        public virtual ObjectResult<LayUser_Result> LayUser(string userName, string pass)
+        {
+            var userNameParameter = userName != null ?
+                new ObjectParameter("userName", userName) :
+                new ObjectParameter("userName", typeof(string));
+    
+            var passParameter = pass != null ?
+                new ObjectParameter("pass", pass) :
+                new ObjectParameter("pass", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LayUser_Result>("LayUser", userNameParameter, passParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> LayQuyenUser(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("LayQuyenUser", idParameter);
+        }
     }
 }

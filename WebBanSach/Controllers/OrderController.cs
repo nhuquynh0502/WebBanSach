@@ -11,92 +11,66 @@ namespace WebBanSach.Controllers
 {
     public class OrderController : Controller
     {
-
         // GET: QuanLy
         public List<ItemGioHang> GetGioHang()
-        {
-            //var id = (Session["UserLogin"] as User).ID_User;
+        { 
             List<ItemGioHang> lstGioHang = new List<ItemGioHang>();
-            using (var _context = new WebBanSachEntities())
+            if(Session["UserLogin"] != null) 
             {
-                var lstGH = _context.f_GetAllCart(1).Select(x => new
+                var idUser = (Session["UserLogin"] as User).ID_User;
+                using (var _context = new WebBanSachEntities())
                 {
-                    
-                    x.ID_Book,
-                    x.Name,
-                    x.Image,
-                    x.Quantity,
-                    x.Price
-                }).ToList();
-                lstGH.ForEach(i =>
-                {
-                    ItemGioHang it = new ItemGioHang();
-                    it.Id = (int)i.ID_Book;
-                    it.Image = i.Image;
-                    it.Name = i.Name;
-                    it.Price = (double)i.Price;
-                    it.Quantity = (int)i.Quantity;
-                    it.Total = it.Price * it.Quantity;
-                    lstGioHang.Add(it);
-                });
+                    var lstGH = _context.f_GetAllCart(idUser).Select(x => new
+                    {
+                        x.ID_Book,
+                        x.Name,
+                        x.Image,
+                        x.Quantity,
+                        x.Price
+                    }).ToList();
+                    lstGH.ForEach(i =>
+                    {
+                        ItemGioHang it = new ItemGioHang();
+                        it.Id = (int)i.ID_Book;
+                        it.Image = i.Image;
+                        it.Name = i.Name;
+                        it.Price = (double)i.Price;
+                        it.Quantity = (int)i.Quantity;
+                        it.Total = it.Price * it.Quantity;
+                        lstGioHang.Add(it);
+                    });
+                }
+                
             }
             return lstGioHang;
         }
         public ActionResult ThemGioHang(int? id, string strURL)
         {
             var _context = new WebBanSachEntities();
-            Book b = _context.Books.SingleOrDefault(n => n.ID_Book == id);
-            if (b == null)
+            if (Session["UserLogin"] != null)
             {
-                Response.StatusCode = 404;
-                return null;
+                var idUser = (Session["UserLogin"] as User).ID_User;
+                
+                Book b = _context.Books.SingleOrDefault(n => n.ID_Book == id);
+                if (b == null)
+                {
+                    Response.StatusCode = 404;
+                    return null;
+                }
+                List<ItemGioHang> lstGH = GetGioHang();
+                ItemGioHang bcheck = lstGH.SingleOrDefault(n => n.Id == id);
+                if (bcheck == null)
+                {
+                    _context.p_AddToCart(idUser, id, 0);
+                    return Redirect(strURL);
+                }
+                if (b.Amount < 1)
+                {
+                    return View("ThongBao", "Message");
+                }
+                _context.p_AddToCart(idUser, b.ID_Book, 1);
             }
-            List<ItemGioHang> lstGH = GetGioHang();
-            ItemGioHang bcheck = lstGH.SingleOrDefault(n => n.Id == id);
-            if (bcheck != null)
-            {
-                _context.p_AddToCart(1, id, 1);
-            }
-            if (b.Amount < 1)
-            {
-                return View("ThongBao", "Message");
-            }
-            _context.p_AddToCart(1, b.ID_Book, 0);
             return Redirect(strURL);
-        }
-        public void AddOrder_Detail(int id, Book b)
-        {
-            using (var _context = new WebBanSachEntities())
-            {
-                var i = _context.Orders.SingleOrDefault(n => n.ID_Order == id);
-                Order_Detail od = new Order_Detail();
-                od.ID_Order = i.ID_Order;
-                od.ID_Book = b.ID_Book;
-                od.Book_Name = b.Name;
-                od.Price = b.Price;
-                od.Quantity = 1;
-                _context.Order_Detail.Add(od);
-                _context.SaveChanges();
-            }
-
-        }
-        public int AddOrder(Book b)
-        {
-            using (var _context = new WebBanSachEntities())
-            {
-                Order i = new Order();
-                i.ID_Order = _context.Orders.ToList().Count() + 1;
-                //i.ID_User = (Session["UserLogin"] as User).ID_User;
-                i.ID_User = 1;
-                i.Order_Date = DateTime.Now.Date;
-                i.Delivery_Date = DateTime.Now.Date;
-                i.Order_Status = -1;
-                i.Puschase = false;
-                _context.Orders.Add(i);
-                _context.SaveChanges();
-                return i.ID_Order;
-            }
-
         }
         public int Quantity()
         {
@@ -155,39 +129,46 @@ namespace WebBanSach.Controllers
         [HttpPost]
         public ActionResult UpdateGioHang(ItemGioHang item, int OldQuantity)
         {
+            
             var _context = new WebBanSachEntities();
-            //sửa lại id user
-            var it = _context.Orders.Where(n => n.ID_User == 1 && n.Order_Status == -1).ToList();
-            int quantity = OldQuantity - item.Quantity;
-            Book check = _context.Books.SingleOrDefault(n => n.ID_Book == item.Id);
-            if (item.Quantity <= 0)
+            if(Session["UserLogin"] != null)
             {
-                //sửa lại id user
-                _context.XoaSachTrongOrder_Detail(1, check.ID_Book);
-            }
-            else
-            {
-                if (check.Amount < item.Quantity)
-                {
-                    return RedirectToAction("ThongBao", "Message");
-                }
+                var idUser = (Session["UserLogin"] as User).ID_User;
 
-                if (it.Count != 0)
+                var it = _context.Orders.Where(n => n.ID_User == idUser && n.Order_Status == -1).ToList();
+                int quantity = OldQuantity - item.Quantity;
+                Book check = _context.Books.SingleOrDefault(n => n.ID_Book == item.Id);
+                if (item.Quantity <= 0)
                 {
-                    _context.p_UpdateCart(1, check.ID_Book, item.Quantity, quantity);
-                    //sửa lại id user
+                    _context.p_DeleteCart(idUser, check.ID_Book);
+                }
+                else
+                {
+                    if (check.Amount < item.Quantity)
+                    {
+                        return RedirectToAction("ThongBao", "Message");
+                    }
+
+                    if (it.Count != 0)
+                    {
+                        _context.p_UpdateCart(idUser, check.ID_Book, item.Quantity, quantity);
+                    }
                 }
             }
             return RedirectToAction("XemChiTiet", "Order");
         }
         public ActionResult DeleteGioHang(int id)
         {
-            ItemGioHang bcheck = GetGioHang().SingleOrDefault(n => n.Id == id);
-            var _context = new WebBanSachEntities();
-            var item = _context.Orders.Where(n => n.ID_User == 1 && n.Order_Status == -1).ToList();
-            if (item.Count != 0)
+            if(Session["UserLogin"] != null)
             {
-                _context.XoaSachTrongOrder_Detail(1, id);
+                var idUser = (Session["UserLogin"] as User).ID_User;
+                ItemGioHang bcheck = GetGioHang().SingleOrDefault(n => n.Id == id);
+                var _context = new WebBanSachEntities();
+                var item = _context.Orders.Where(n => n.ID_User == 1 && n.Order_Status == -1).ToList();
+                if (item.Count != 0)
+                {
+                    _context.p_DeleteCart(idUser, id);
+                }
             }
             return RedirectToAction("XemChiTiet", "Order");
         }
@@ -197,15 +178,18 @@ namespace WebBanSach.Controllers
             {
                 ViewBag.GioHang = GetGioHang();
                 ViewBag.Total = Total();
-                return View(/*(Session["UserLogin"] as User).ID_User*/_context.Users.Single(n => n.ID_User == 1));
+                return View((Session["UserLogin"] as User).ID_User);
             }
 
         }
         public ActionResult DatHang()
         {
             var _context = new WebBanSachEntities();
-            var id =/* (Session["UserLogin"] as User).ID_User*/1;
-            _context.p_CheckOrder(id);
+            if(Session["UserLogin"] != null)
+            {
+                var id = (Session["UserLogin"] as User).ID_User;
+                _context.p_CheckOrder(id);
+            }
             return RedirectToAction("Index", "Home");
 
         }

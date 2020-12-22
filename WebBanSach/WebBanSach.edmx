@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="WebBanSachModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="WebBanSachModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Books">
           <Key>
             <PropertyRef Name="ID_Book" />
@@ -94,6 +94,7 @@
           <Property Name="Phone" Type="varchar" MaxLength="20" />
           <Property Name="UserName" Type="varchar" MaxLength="250" />
           <Property Name="PassWd" Type="varchar" MaxLength="250" />
+          <Property Name="Permisson" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'WebBanSach.dbo.HienThiSachKinhDi' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -294,6 +295,7 @@ warning 6002: The table/view 'WebBanSach.dbo.ViewModel' does not have a primary 
               <RowType>
                 <Property Name="UserName" Type="varchar" MaxLength="250" />
                 <Property Name="Passwd" Type="varchar" MaxLength="250" />
+                <Property Name="Permisson" Type="int" />
               </RowType>
             </CollectionType>
           </ReturnType>
@@ -304,8 +306,15 @@ warning 6002: The table/view 'WebBanSach.dbo.ViewModel' does not have a primary 
         <Function Name="HienThiSachNgonTinh" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="HienThiSachTieuThuyet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="HienThiThongTinSach" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="LayQuyenUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
         <Function Name="LaySach" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID_Book" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LayUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userName" Type="varchar" Mode="In" />
+          <Parameter Name="pass" Type="varchar" Mode="In" />
         </Function>
         <Function Name="p_AddToCart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID_User" Type="int" Mode="In" />
@@ -430,8 +439,7 @@ warning 6002: The table/view 'WebBanSach.dbo.ViewModel' does not have a primary 
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WebBanSachModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -556,6 +564,7 @@ warning 6002: The table/view 'WebBanSach.dbo.ViewModel' does not have a primary 
           <Property Name="UserName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="PassWd" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__ID_User__30F848ED" FromRole="Users" ToRole="Orders" />
+          <Property Name="Permisson" Type="Int32" />
         </EntityType>
         <EntityType Name="HienThiSachKinhDi">
           <Key>
@@ -712,13 +721,13 @@ warning 6002: The table/view 'WebBanSach.dbo.ViewModel' does not have a primary 
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <FunctionImport Name="f_GetAllCart" IsComposable="true" ReturnType="Collection(WebBanSachModel.f_GetAllCart_Result)">
-            <Parameter Name="ID_User" Mode="In" Type="Int32" />
+          <Parameter Name="ID_User" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="f_GetListQL" IsComposable="true" ReturnType="Collection(WebBanSachModel.f_GetListQL_Result)">
-            <Parameter Name="status" Mode="In" Type="Int32" />
+          <Parameter Name="status" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getdangnhap" IsComposable="true" ReturnType="Collection(WebBanSachModel.getdangnhap_Result)">
-            <Parameter Name="UserName" Mode="In" Type="String" />
+          <Parameter Name="UserName" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="adduser1" ReturnType="Collection(WebBanSachModel.adduser1_Result)">
             <Parameter Name="First_Name" Mode="In" Type="String" />
@@ -752,7 +761,7 @@ warning 6002: The table/view 'WebBanSach.dbo.ViewModel' does not have a primary 
           <FunctionImport Name="HienThiSachTieuThuyet" ReturnType="Collection(WebBanSachModel.HienThiSachTieuThuyet_Result)" />
           <FunctionImport Name="HienThiThongTinSach" ReturnType="Collection(WebBanSachModel.HienThiThongTinSach_Result)" />
           <FunctionImport Name="LaySach" ReturnType="Collection(WebBanSachModel.LaySach_Result)">
-            <Parameter Name="ID_Book" Mode="In" Type="Int32" />
+          <Parameter Name="ID_Book" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="p_AddToCart">
             <Parameter Name="ID_User" Mode="In" Type="Int32" />
@@ -760,7 +769,7 @@ warning 6002: The table/view 'WebBanSach.dbo.ViewModel' does not have a primary 
             <Parameter Name="Status" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="p_CheckOrder">
-            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          <Parameter Name="UserID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="p_DeleteCart">
             <Parameter Name="ID_User" Mode="In" Type="Int32" />
@@ -791,10 +800,10 @@ warning 6002: The table/view 'WebBanSach.dbo.ViewModel' does not have a primary 
             <Parameter Name="ID_Provider" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="TimKiemThongTin" ReturnType="Collection(WebBanSachModel.TimKiemThongTin_Result)">
-            <Parameter Name="chuoi" Mode="In" Type="String" />
+          <Parameter Name="chuoi" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="XoaSach">
-            <Parameter Name="ID_Book" Mode="In" Type="Int32" />
+          <Parameter Name="ID_Book" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="XoaSachTrongOrder_Detail">
             <Parameter Name="ID_Order" Mode="In" Type="Int32" />
@@ -807,10 +816,17 @@ warning 6002: The table/view 'WebBanSach.dbo.ViewModel' does not have a primary 
           <FunctionImport Name="HienThiSachNgonTinh1" EntitySet="Books" ReturnType="Collection(WebBanSachModel.Book)" />
           <FunctionImport Name="HienThiSachTieuThuyet1" EntitySet="Books" ReturnType="Collection(WebBanSachModel.Book)" />
           <FunctionImport Name="TimKiemThongTin1" EntitySet="Books" ReturnType="Collection(WebBanSachModel.Book)">
-            <Parameter Name="chuoi" Mode="In" Type="String" />
+          <Parameter Name="chuoi" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="LaySach1" EntitySet="Books" ReturnType="Collection(WebBanSachModel.Book)">
-            <Parameter Name="ID_Book" Mode="In" Type="Int32" />
+          <Parameter Name="ID_Book" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LayUser" ReturnType="Collection(WebBanSachModel.LayUser_Result)">
+            <Parameter Name="userName" Mode="In" Type="String" />
+            <Parameter Name="pass" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="LayQuyenUser" ReturnType="Collection(Int32)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="adduser1_Result">
@@ -926,6 +942,19 @@ warning 6002: The table/view 'WebBanSach.dbo.ViewModel' does not have a primary 
           <Property Type="Int32" Name="ID_Publisher" Nullable="true" />
           <Property Type="Int32" Name="ID_Provider" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="LayUser_Result">
+          <Property Type="Int32" Name="ID_User" Nullable="false" />
+          <Property Type="String" Name="First_Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Last_Name" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="DoB" Nullable="true" />
+          <Property Type="Boolean" Name="Sex" Nullable="true" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="PassWd" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Permisson" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1016,6 +1045,7 @@ warning 6002: The table/view 'WebBanSach.dbo.ViewModel' does not have a primary 
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="WebBanSachModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Permisson" ColumnName="Permisson" />
                 <ScalarProperty Name="ID_User" ColumnName="ID_User" />
                 <ScalarProperty Name="First_Name" ColumnName="First_Name" />
                 <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
@@ -1279,6 +1309,24 @@ warning 6002: The table/view 'WebBanSach.dbo.ViewModel' does not have a primary 
           <FunctionImportMapping FunctionImportName="HienThiSachTieuThuyet1" FunctionName="WebBanSachModel.Store.HienThiSachTieuThuyet" />
           <FunctionImportMapping FunctionImportName="TimKiemThongTin1" FunctionName="WebBanSachModel.Store.TimKiemThongTin" />
           <FunctionImportMapping FunctionImportName="LaySach1" FunctionName="WebBanSachModel.Store.LaySach" />
+          <FunctionImportMapping FunctionImportName="LayUser" FunctionName="WebBanSachModel.Store.LayUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WebBanSachModel.LayUser_Result">
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="DoB" ColumnName="DoB" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PassWd" ColumnName="PassWd" />
+                <ScalarProperty Name="Permisson" ColumnName="Permisson" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LayQuyenUser" FunctionName="WebBanSachModel.Store.LayQuyenUser" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
