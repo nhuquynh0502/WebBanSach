@@ -1,0 +1,56 @@
+.nav-tabs > li > a {
+    color: #4caf50;
+    cursor: pointer;
+    background-color: #674b41;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+    width: 283px;
+    height: 50px;
+    text-align: center;
+    font-size: 20px;
+    font-family: segoe ui;
+    font-weight: bold;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    background-color: #4a2518;
+}
+
+.gridRow td a {
+    text-decoration: none;
+}
+
+.gridAltRow td a {
+    text-decoration: none;
+}
+
+.gridTable {
+    border: 1px solid #999999;
+    width: 100%;
+}
+
+.gridTable td {
+    border: 1px solid #999999;
+    text-align: center;
+}
+
+.gridHeard {
+    background: #a39d9d;
+    text-align: center;
+}
+
+    .gridHeard th a {
+        text-align: center;
+        text-decoration: none;
+        color: black;
+    }
+
+tr {
+    height: 50px;
+}
+
+.nav-tabs {
+    width: 100%;
+    margin: auto;
+    margin: 0px 15px;
+}

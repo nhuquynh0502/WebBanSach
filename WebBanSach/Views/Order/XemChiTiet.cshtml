@@ -1,0 +1,65 @@
+﻿@using WebBanSach.Models
+@model List<ItemGioHang>
+
+@{
+    ViewBag.Title = "XemChiTiet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.Count == 0)
+{
+    <h2>Giỏ hàng trống tiếp tục mua sắm!!!</h2>
+}
+else
+{
+    <table class="container" role="alert" style="margin-top:3%;">
+        <thead>
+            <tr>
+                <td>Mã sách</td>
+                <td>Tên sách</td>
+                <td>Hình ảnh</td>
+                <td>Số lượng</td>
+                <td>Giá</td>
+                <td>Thành tiền</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var i in Model)
+            {
+                <tr>
+                    <td>@i.Id</td>
+                    <td>@i.Name</td>
+                    <td><img src="@Url.Content("~/Content/images/"+i.Image)" style="width:60px;height:90px;" /></td>
+                    <td>@i.Quantity</td>
+                    <td>@i.Price.ToString("#,##")</td>
+                    <td>@i.Total.ToString("#,##")</td>
+                    <td>@Html.ActionLink("Chỉnh sửa", "EditGioHang", new { @id = i.Id })</td>
+                    <td>@Html.ActionLink("Xóa", "DeleteGioHang", new { @id = i.Id })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="total" style="width:300px;height:30px; border:1px solid brown;text-align:center;margin-left:10px;"><h5>Tổng tiền: @(((int)@ViewBag.Total).ToString("#,##"))</h5></div>
+    <div class="order">
+        @using (Html.BeginForm("OrderDetails", "Order"))
+        {
+            <button type="submit" class="btn-success" id="btnOrder">Đặt hàng</button>
+        }
+    </div>
+}
+<style>
+    #btnOrder {
+        float: right;
+        width: 100px;
+        height: 40px;
+        margin-right:30px;
+    }
+    i.fa.fa-shopping-basket {
+        right: 4%;
+        top: 10%;
+    }
+    .Quantity {
+        top: 9%;
+
+    }
+</style>

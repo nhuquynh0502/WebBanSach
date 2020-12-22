@@ -1,0 +1,93 @@
+﻿@using WebBanSach.Models
+@model Order
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+@{
+    ViewBag.Title = "DuyetDonHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Order_Detail> lstod = ViewBag.Order_Detail as List<Order_Detail>;
+    List<string> lstStatus = new List<string> { "Hủy", "Đã đặt hàng", "Đã giao hàng", "Đổi trả" };
+}
+@using (Html.BeginForm())
+{
+
+    <div class="table">
+        <table class="table" id="table">
+            <tr>
+                <td>Mã đơn hàng:<b style="color:brown;">@Model.ID_Order @Html.Hidden("ID_Order", Model.ID_Order)</b></td>
+                <td>Mã khách hàng: <b style="color:brown;">@Model.ID_User</b></td>
+                <td>Tên khách hàng: <b style="color:brown;">@Model.User.Last_Name @Model.User.First_Name</b></td>
+            </tr>
+            <tr>
+                <td>Địa chỉ: @Model.User.Address</td>
+                <td>Số điện thoại: @Model.User.Phone</td>
+                <td>Email: @Model.User.Email</td>
+            </tr>
+            <tr>
+                <td>Ngày đặt: @Model.Order_Date.Value.ToString("dd/MM/yyyy")</td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <table style="width:100%;">
+                        <tr>
+                            <td>
+                                Trạng thái:
+                                <select name="Order_Status">
+                                    @for (int i = 0; i < lstStatus.Count(); i++)
+                                    {
+                                        if (Model.Order_Status == i)
+                                        {
+                                            <option class="@i" selected="selected" value="@i">@lstStatus[i]</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@i">@lstStatus[i]</option>
+                                        }
+                                    }
+                                </select>
+                            </td>
+                            <td>Thanh toán: @Html.EditorFor(model => model.Puschase)</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>Sách</td>
+                <td>Hình ảnh</td>
+                <td>Số lượng</td>
+                <td>Đơn giá</td>
+            </tr>
+            @foreach (var item in lstod)
+            {
+                <tr>
+                    <td>@item.Book.Name</td>
+                    <td><img src="@Url.Content("~/Content/images/" + item.Book.Images)" style="width:60px;height:90px;" /></td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Price.Value.ToString("#,##")</td>
+                </tr>
+            }
+            <tr>
+                <td>Tổng số lượng: @Model.Order_Detail.(n => n.Quantity)</td>
+            </tr>
+            <tr>
+                <td>Thanh toán: @Model.Order_Detail.(n => n.Price).Value.ToString("#,##") VND</td>
+            </tr>
+        </table>
+        <input type="button" value="In đơn hàng" id="btnPrint" class="btn-success" />
+        <input type="submit" value="Duyệt đơn hàng" id="btnSubmit" class="btn-success" />
+    </div>
+}
+<script>
+    $('#btnPrint').click(function () {
+        var content = "<table>" + $('#table').html() + "</table>";
+        InDonHang(content);
+    })
+    function InDonHang(content) {
+        var indh = window.open('', '', 'height=500px,width=800px');
+        indh.document.write('<html><head><title>Thông tin chi tiết</title>');
+        indh.document.write('</head><body>');
+        indh.document.write(content);
+        indh.document.write('</body></html>');
+        indh.document.close();
+        indh.print();
+    }
+</script>

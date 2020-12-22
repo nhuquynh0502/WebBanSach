@@ -1,0 +1,53 @@
+﻿@model WebBanSach.Models.ItemGioHang
+@{
+    ViewBag.Title = "EditGioHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<WebBanSach.Models.ItemGioHang> lstGH = ViewBag.GioHang as List<WebBanSach.Models.ItemGioHang>;
+    int old = (int)ViewBag.OldQuantity;
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Mã sách</td>
+            <td>Tên sách</td>
+            <td>Hình ảnh</td>
+            <td>Số lượng</td>
+            <td>Giá</td>
+            <td>Tổng tiền</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in lstGH)
+        {
+            if (i.Id == Model.Id)
+            {
+                using (Html.BeginForm("UpdateGioHang", "Order"))
+                {
+                    <tr>
+                        <td>@i.Id @Html.Hidden("Id", i.Id)</td>
+                        <td>@i.Name</td>
+                        <td><img src="@Url.Content("~/Content/images/"+ i.Image)" style="width:60px;height:90px;" /></td>
+                        <td>@Html.TextBox("Quantity", i.Quantity) @Html.Hidden("OldQuantity", old)</td>
+                        <td>@i.Price.ToString("#,##")</td>
+                        <td>@i.Total.ToString("#,##")</td>
+                        <td><input type="submit" value="Cập nhật" class="btn-success" /></td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td>@i.Id</td>
+                    <td>@i.Name</td>
+                    <td><img src="@Url.Content("~/Content/images/"+ i.Image)" style="width:60px;height:90px;" /></td>
+                    <td>@i.Quantity</td>
+                    <td>@i.Price.ToString("#,##")</td>
+                    <td>@i.Total.ToString("#,##")</td>
+                    <td>@Html.ActionLink("Chỉnh sửa", "EditGioHang", new { @id = i.Id })</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+

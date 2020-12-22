@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="20dc54e804f64f0eb95d73fabfd574c0" Name="Diagram1">
+        <EntityTypeShape EntityType="WebBanSachModel.Book" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanSachModel.FeedBack" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanSachModel.Genre" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanSachModel.Order_Detail" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanSachModel.Order" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanSachModel.Provider" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanSachModel.Publisher" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanSachModel.User" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanSachModel.HienThiSachKinhDi" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanSachModel.HienThiSachTrinhTham" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanSachModel.ViewModel" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="WebBanSachModel.FK__Books__ID_Genre__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanSachModel.FK__Books__ID_Provid__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanSachModel.FK__Books__ID_Publis__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanSachModel.FK__Order_Det__ID_Bo__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanSachModel.FK__Order_Det__ID_Or__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanSachModel.FK__Orders__ID_User__30F848ED" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

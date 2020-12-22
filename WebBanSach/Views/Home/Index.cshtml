@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .text{
+        position:absolute;
+        top: 10px;
+    }
+</style>
+
+<div class=" py-4">
+    <div class="container d-flex align-items-center" role="alert">
+        <h1 class="text mt-3 mb-3">
+            <div class="d-flex flex-column">
+                <h3>HỆ THỐNG BÁN SÁCH ONLINE</h3>
+                <h6>Quận Thủ Đức, TPHCM - Điện thoại: (84-8) 37221223</h6>
+            </div>
+        </h1>
+        <img src="~/Images/AnhSach.jpg" height="280" width="100%"/>
+    </div>
+</div>
+
+<div class="container" role="alert">
+    <form action="/Home/TrangQuanLySach" method="post" style="width: 100%">
+        <div class="form-group form-row mt-4">
+            <b><label class="col">Tìm kiếm</label></b>
+            <input type="text" value="@ViewBag.value" class="form-control col" placeholder="Tìm kiếm" name="chuoi" />
+        </div>
+    </form> 
+</div>

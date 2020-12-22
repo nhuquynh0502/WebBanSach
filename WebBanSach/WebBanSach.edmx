@@ -1,0 +1,1305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="WebBanSachModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Books">
+          <Key>
+            <PropertyRef Name="ID_Book" />
+          </Key>
+          <Property Name="ID_Book" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="Images" Type="nvarchar(max)" />
+          <Property Name="Author" Type="nvarchar" MaxLength="100" />
+          <Property Name="Release_Date" Type="date" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="Discription" Type="nvarchar(max)" />
+          <Property Name="Age_Limit" Type="int" />
+          <Property Name="Price" Type="float" />
+          <Property Name="ID_Genre" Type="int" />
+          <Property Name="ID_Publisher" Type="int" />
+          <Property Name="ID_Provider" Type="int" />
+        </EntityType>
+        <EntityType Name="FeedBack">
+          <Key>
+            <PropertyRef Name="ID_FeedBack" />
+          </Key>
+          <Property Name="ID_FeedBack" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Likes" Type="bit" />
+          <Property Name="Cmt_Time" Type="datetime" />
+          <Property Name="Cmt" Type="nvarchar" MaxLength="500" />
+          <Property Name="Rate" Type="int" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="ID_Genre" />
+          </Key>
+          <Property Name="ID_Genre" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="Age_Limit" Type="int" />
+        </EntityType>
+        <EntityType Name="Order_Detail">
+          <Key>
+            <PropertyRef Name="ID_Order" />
+            <PropertyRef Name="ID_Book" />
+          </Key>
+          <Property Name="ID_Order" Type="int" Nullable="false" />
+          <Property Name="ID_Book" Type="int" Nullable="false" />
+          <Property Name="Book_Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Price" Type="float" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="ID_Order" />
+          </Key>
+          <Property Name="ID_Order" Type="int" Nullable="false" />
+          <Property Name="Order_Date" Type="date" />
+          <Property Name="Delivery_Date" Type="date" />
+          <Property Name="Order_Status" Type="int" />
+          <Property Name="Puschase" Type="bit" />
+          <Property Name="ID_User" Type="int" />
+        </EntityType>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="ID_Provider" />
+          </Key>
+          <Property Name="ID_Provider" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="Address_Pro" Type="nvarchar" MaxLength="250" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Publisher">
+          <Key>
+            <PropertyRef Name="ID_Publisher" />
+          </Key>
+          <Property Name="ID_Publisher" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="Infomation" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID_User" />
+          </Key>
+          <Property Name="ID_User" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="First_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Last_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="DoB" Type="date" />
+          <Property Name="Sex" Type="bit" />
+          <Property Name="Address" Type="nvarchar" MaxLength="250" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" />
+          <Property Name="UserName" Type="varchar" MaxLength="250" />
+          <Property Name="PassWd" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'WebBanSach.dbo.HienThiSachKinhDi' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="HienThiSachKinhDi">
+          <Key>
+            <PropertyRef Name="ID_Book" />
+          </Key>
+          <Property Name="ID_Book" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="Images" Type="nvarchar(max)" />
+          <Property Name="Author" Type="nvarchar" MaxLength="100" />
+          <Property Name="Release_Date" Type="date" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="Discription" Type="nvarchar(max)" />
+          <Property Name="Age_Limit" Type="int" />
+          <Property Name="Price" Type="float" />
+          <Property Name="ID_Genre" Type="int" />
+          <Property Name="ID_Publisher" Type="int" />
+          <Property Name="ID_Provider" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'WebBanSach.dbo.HienThiSachTrinhTham' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="HienThiSachTrinhTham">
+          <Key>
+            <PropertyRef Name="ID_Book" />
+          </Key>
+          <Property Name="ID_Book" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="Images" Type="nvarchar(max)" />
+          <Property Name="Author" Type="nvarchar" MaxLength="100" />
+          <Property Name="Release_Date" Type="date" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="Discription" Type="nvarchar(max)" />
+          <Property Name="Age_Limit" Type="int" />
+          <Property Name="Price" Type="float" />
+          <Property Name="ID_Genre" Type="int" />
+          <Property Name="ID_Publisher" Type="int" />
+          <Property Name="ID_Provider" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'WebBanSach.dbo.ViewModel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewModel">
+          <Key>
+            <PropertyRef Name="ID_Order" />
+          </Key>
+          <Property Name="ID_Order" Type="int" Nullable="false" />
+          <Property Name="ID_User" Type="int" />
+          <Property Name="Order_Status" Type="int" />
+          <Property Name="Order_Date" Type="date" />
+          <Property Name="Delivery_Date" Type="date" />
+          <Property Name="First_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Last_Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Books__ID_Genre__2A4B4B5E">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="0..1" />
+          <End Role="Books" Type="Self.Books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="ID_Genre" />
+            </Principal>
+            <Dependent Role="Books">
+              <PropertyRef Name="ID_Genre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Books__ID_Provid__2C3393D0">
+          <End Role="Provider" Type="Self.Provider" Multiplicity="0..1" />
+          <End Role="Books" Type="Self.Books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="ID_Provider" />
+            </Principal>
+            <Dependent Role="Books">
+              <PropertyRef Name="ID_Provider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Books__ID_Publis__2B3F6F97">
+          <End Role="Publisher" Type="Self.Publisher" Multiplicity="0..1" />
+          <End Role="Books" Type="Self.Books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Publisher">
+              <PropertyRef Name="ID_Publisher" />
+            </Principal>
+            <Dependent Role="Books">
+              <PropertyRef Name="ID_Publisher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Det__ID_Bo__34C8D9D1">
+          <End Role="Books" Type="Self.Books" Multiplicity="1" />
+          <End Role="Order_Detail" Type="Self.Order_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="ID_Book" />
+            </Principal>
+            <Dependent Role="Order_Detail">
+              <PropertyRef Name="ID_Book" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Det__ID_Or__33D4B598">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Order_Detail" Type="Self.Order_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="ID_Order" />
+            </Principal>
+            <Dependent Role="Order_Detail">
+              <PropertyRef Name="ID_Order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__ID_User__30F848ED">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID_User" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ID_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="adduser1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="First_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Last_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="DoB" Type="date" Mode="In" />
+          <Parameter Name="Sex" Type="bit" Mode="In" />
+          <Parameter Name="Address" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone" Type="varchar" Mode="In" />
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+          <Parameter Name="Passwd" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="BoDauTrongChuoi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar(max)">
+          <Parameter Name="inputVar" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="CapNhatSach" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_Book" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Images" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Author" Type="nvarchar" Mode="In" />
+          <Parameter Name="Release_Date" Type="date" Mode="In" />
+          <Parameter Name="Amount" Type="int" Mode="In" />
+          <Parameter Name="Discription" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Age_Limit" Type="int" Mode="In" />
+          <Parameter Name="Price" Type="float" Mode="In" />
+          <Parameter Name="ID_Genre" Type="int" Mode="In" />
+          <Parameter Name="ID_Publisher" Type="int" Mode="In" />
+          <Parameter Name="ID_Provider" Type="int" Mode="In" />
+        </Function>
+        <Function Name="checkuser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="dangnhap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+          <Parameter Name="Passwd" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="DemSoSachTrongDon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="ID_Order" Type="int" Mode="In" />
+        </Function>
+        <Function Name="f_GetAllCart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_User" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ID_Book" Type="int" />
+                <Property Name="Name" Type="nvarchar" MaxLength="250" />
+                <Property Name="Image" Type="nvarchar(max)" />
+                <Property Name="Price" Type="float" />
+                <Property Name="Quantity" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="f_GetListQL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="status" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ID_Order" Type="int" Nullable="false" />
+                <Property Name="ID_User" Type="int" />
+                <Property Name="Order_Status" Type="int" />
+                <Property Name="Order_Date" Type="date" />
+                <Property Name="Delivery_Date" Type="date" />
+                <Property Name="First_Name" Type="nvarchar" MaxLength="50" />
+                <Property Name="Last_Name" Type="nvarchar" MaxLength="50" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="getdangnhap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="UserName" Type="varchar" MaxLength="250" />
+                <Property Name="Passwd" Type="varchar" MaxLength="250" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="HienThiDanhSachNhaCungCap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="HienThiDanhSachNhaSanXuat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="HienThiDanhSachTheLoaiSach" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="HienThiSachNgonTinh" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="HienThiSachTieuThuyet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="HienThiThongTinSach" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="LaySach" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_Book" Type="int" Mode="In" />
+        </Function>
+        <Function Name="p_AddToCart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_User" Type="int" Mode="In" />
+          <Parameter Name="ID_Book" Type="int" Mode="In" />
+          <Parameter Name="Status" Type="int" Mode="In" />
+        </Function>
+        <Function Name="p_CheckOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="p_DeleteCart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_User" Type="int" Mode="In" />
+          <Parameter Name="ID_Book" Type="int" Mode="In" />
+        </Function>
+        <Function Name="p_DuyetDonHang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="status" Type="int" Mode="In" />
+          <Parameter Name="puschase" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="p_UpdateCart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_User" Type="int" Mode="In" />
+          <Parameter Name="ID_Book" Type="int" Mode="In" />
+          <Parameter Name="Quantity" Type="int" Mode="In" />
+          <Parameter Name="BookQuantity" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ThemSachMoi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Images" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Author" Type="nvarchar" Mode="In" />
+          <Parameter Name="Release_Date" Type="date" Mode="In" />
+          <Parameter Name="Amount" Type="int" Mode="In" />
+          <Parameter Name="Discription" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Age_Limit" Type="int" Mode="In" />
+          <Parameter Name="Price" Type="float" Mode="In" />
+          <Parameter Name="ID_Genre" Type="int" Mode="In" />
+          <Parameter Name="ID_Publisher" Type="int" Mode="In" />
+          <Parameter Name="ID_Provider" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TimKiemThongTin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="chuoi" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="XoaSach" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_Book" Type="int" Mode="In" />
+        </Function>
+        <Function Name="XoaSachTrongOrder_Detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_Order" Type="int" Mode="In" />
+          <Parameter Name="ID_Book" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="WebBanSachModelStoreContainer">
+          <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FeedBack" EntityType="Self.FeedBack" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order_Detail" EntityType="Self.Order_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provider" EntityType="Self.Provider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Publisher" EntityType="Self.Publisher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HienThiSachKinhDi" EntityType="Self.HienThiSachKinhDi" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [HienThiSachKinhDi].[ID_Book] AS [ID_Book], 
+    [HienThiSachKinhDi].[Name] AS [Name], 
+    [HienThiSachKinhDi].[Images] AS [Images], 
+    [HienThiSachKinhDi].[Author] AS [Author], 
+    [HienThiSachKinhDi].[Release_Date] AS [Release_Date], 
+    [HienThiSachKinhDi].[Amount] AS [Amount], 
+    [HienThiSachKinhDi].[Discription] AS [Discription], 
+    [HienThiSachKinhDi].[Age_Limit] AS [Age_Limit], 
+    [HienThiSachKinhDi].[Price] AS [Price], 
+    [HienThiSachKinhDi].[ID_Genre] AS [ID_Genre], 
+    [HienThiSachKinhDi].[ID_Publisher] AS [ID_Publisher], 
+    [HienThiSachKinhDi].[ID_Provider] AS [ID_Provider]
+    FROM [dbo].[HienThiSachKinhDi] AS [HienThiSachKinhDi]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="HienThiSachTrinhTham" EntityType="Self.HienThiSachTrinhTham" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [HienThiSachTrinhTham].[ID_Book] AS [ID_Book], 
+    [HienThiSachTrinhTham].[Name] AS [Name], 
+    [HienThiSachTrinhTham].[Images] AS [Images], 
+    [HienThiSachTrinhTham].[Author] AS [Author], 
+    [HienThiSachTrinhTham].[Release_Date] AS [Release_Date], 
+    [HienThiSachTrinhTham].[Amount] AS [Amount], 
+    [HienThiSachTrinhTham].[Discription] AS [Discription], 
+    [HienThiSachTrinhTham].[Age_Limit] AS [Age_Limit], 
+    [HienThiSachTrinhTham].[Price] AS [Price], 
+    [HienThiSachTrinhTham].[ID_Genre] AS [ID_Genre], 
+    [HienThiSachTrinhTham].[ID_Publisher] AS [ID_Publisher], 
+    [HienThiSachTrinhTham].[ID_Provider] AS [ID_Provider]
+    FROM [dbo].[HienThiSachTrinhTham] AS [HienThiSachTrinhTham]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ViewModel" EntityType="Self.ViewModel" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewModel].[ID_Order] AS [ID_Order], 
+    [ViewModel].[ID_User] AS [ID_User], 
+    [ViewModel].[Order_Status] AS [Order_Status], 
+    [ViewModel].[Order_Date] AS [Order_Date], 
+    [ViewModel].[Delivery_Date] AS [Delivery_Date], 
+    [ViewModel].[First_Name] AS [First_Name], 
+    [ViewModel].[Last_Name] AS [Last_Name]
+    FROM [dbo].[ViewModel] AS [ViewModel]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Books__ID_Genre__2A4B4B5E" Association="Self.FK__Books__ID_Genre__2A4B4B5E">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="Books" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Books__ID_Provid__2C3393D0" Association="Self.FK__Books__ID_Provid__2C3393D0">
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="Books" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Books__ID_Publis__2B3F6F97" Association="Self.FK__Books__ID_Publis__2B3F6F97">
+            <End Role="Publisher" EntitySet="Publisher" />
+            <End Role="Books" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Det__ID_Bo__34C8D9D1" Association="Self.FK__Order_Det__ID_Bo__34C8D9D1">
+            <End Role="Books" EntitySet="Books" />
+            <End Role="Order_Detail" EntitySet="Order_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Det__ID_Or__33D4B598" Association="Self.FK__Order_Det__ID_Or__33D4B598">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Order_Detail" EntitySet="Order_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__ID_User__30F848ED" Association="Self.FK__Orders__ID_User__30F848ED">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WebBanSachModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="f_GetAllCart_Result">
+          <Property Name="ID_Book" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Quantity" Type="Int32" />
+        </ComplexType>
+        <ComplexType Name="f_GetListQL_Result">
+          <Property Name="ID_Order" Type="Int32" Nullable="false" />
+          <Property Name="ID_User" Type="Int32" />
+          <Property Name="Order_Status" Type="Int32" />
+          <Property Name="Order_Date" Type="DateTime" />
+          <Property Name="Delivery_Date" Type="DateTime" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </ComplexType>
+        <ComplexType Name="getdangnhap_Result">
+          <Property Name="UserName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Passwd" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </ComplexType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="ID_Book" />
+          </Key>
+          <Property Name="ID_Book" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Author" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Release_Date" Type="DateTime" Precision="0" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Age_Limit" Type="Int32" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="ID_Genre" Type="Int32" />
+          <Property Name="ID_Publisher" Type="Int32" />
+          <Property Name="ID_Provider" Type="Int32" />
+          <NavigationProperty Name="Genre" Relationship="Self.FK__Books__ID_Genre__2A4B4B5E" FromRole="Books" ToRole="Genre" />
+          <NavigationProperty Name="Provider" Relationship="Self.FK__Books__ID_Provid__2C3393D0" FromRole="Books" ToRole="Provider" />
+          <NavigationProperty Name="Publisher" Relationship="Self.FK__Books__ID_Publis__2B3F6F97" FromRole="Books" ToRole="Publisher" />
+          <NavigationProperty Name="Order_Detail" Relationship="Self.FK__Order_Det__ID_Bo__34C8D9D1" FromRole="Books" ToRole="Order_Detail" />
+        </EntityType>
+        <EntityType Name="FeedBack">
+          <Key>
+            <PropertyRef Name="ID_FeedBack" />
+          </Key>
+          <Property Name="ID_FeedBack" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Likes" Type="Boolean" />
+          <Property Name="Cmt_Time" Type="DateTime" Precision="3" />
+          <Property Name="Cmt" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Rate" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="ID_Genre" />
+          </Key>
+          <Property Name="ID_Genre" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Age_Limit" Type="Int32" />
+          <NavigationProperty Name="Books" Relationship="Self.FK__Books__ID_Genre__2A4B4B5E" FromRole="Genre" ToRole="Books" />
+        </EntityType>
+        <EntityType Name="Order_Detail">
+          <Key>
+            <PropertyRef Name="ID_Order" />
+            <PropertyRef Name="ID_Book" />
+          </Key>
+          <Property Name="ID_Order" Type="Int32" Nullable="false" />
+          <Property Name="ID_Book" Type="Int32" Nullable="false" />
+          <Property Name="Book_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Price" Type="Double" />
+          <NavigationProperty Name="Book" Relationship="Self.FK__Order_Det__ID_Bo__34C8D9D1" FromRole="Order_Detail" ToRole="Books" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__Order_Det__ID_Or__33D4B598" FromRole="Order_Detail" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID_Order" />
+          </Key>
+          <Property Name="ID_Order" Type="Int32" Nullable="false" />
+          <Property Name="Order_Date" Type="DateTime" Precision="0" />
+          <Property Name="Delivery_Date" Type="DateTime" Precision="0" />
+          <Property Name="Order_Status" Type="Int32" />
+          <Property Name="Puschase" Type="Boolean" />
+          <Property Name="ID_User" Type="Int32" />
+          <NavigationProperty Name="Order_Detail" Relationship="Self.FK__Order_Det__ID_Or__33D4B598" FromRole="Orders" ToRole="Order_Detail" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Orders__ID_User__30F848ED" FromRole="Orders" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="ID_Provider" />
+          </Key>
+          <Property Name="ID_Provider" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Address_Pro" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Books" Relationship="Self.FK__Books__ID_Provid__2C3393D0" FromRole="Provider" ToRole="Books" />
+        </EntityType>
+        <EntityType Name="Publisher">
+          <Key>
+            <PropertyRef Name="ID_Publisher" />
+          </Key>
+          <Property Name="ID_Publisher" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Infomation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Books" Relationship="Self.FK__Books__ID_Publis__2B3F6F97" FromRole="Publisher" ToRole="Books" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID_User" />
+          </Key>
+          <Property Name="ID_User" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DoB" Type="DateTime" Precision="0" />
+          <Property Name="Sex" Type="Boolean" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PassWd" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__ID_User__30F848ED" FromRole="Users" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="HienThiSachKinhDi">
+          <Key>
+            <PropertyRef Name="ID_Book" />
+          </Key>
+          <Property Name="ID_Book" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Author" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Release_Date" Type="DateTime" Precision="0" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Age_Limit" Type="Int32" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="ID_Genre" Type="Int32" />
+          <Property Name="ID_Publisher" Type="Int32" />
+          <Property Name="ID_Provider" Type="Int32" />
+        </EntityType>
+        <EntityType Name="HienThiSachTrinhTham">
+          <Key>
+            <PropertyRef Name="ID_Book" />
+          </Key>
+          <Property Name="ID_Book" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Images" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Author" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Release_Date" Type="DateTime" Precision="0" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Age_Limit" Type="Int32" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="ID_Genre" Type="Int32" />
+          <Property Name="ID_Publisher" Type="Int32" />
+          <Property Name="ID_Provider" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ViewModel">
+          <Key>
+            <PropertyRef Name="ID_Order" />
+          </Key>
+          <Property Name="ID_Order" Type="Int32" Nullable="false" />
+          <Property Name="ID_User" Type="Int32" />
+          <Property Name="Order_Status" Type="Int32" />
+          <Property Name="Order_Date" Type="DateTime" Precision="0" />
+          <Property Name="Delivery_Date" Type="DateTime" Precision="0" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__Books__ID_Genre__2A4B4B5E">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="0..1" />
+          <End Role="Books" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="ID_Genre" />
+            </Principal>
+            <Dependent Role="Books">
+              <PropertyRef Name="ID_Genre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Books__ID_Provid__2C3393D0">
+          <End Role="Provider" Type="Self.Provider" Multiplicity="0..1" />
+          <End Role="Books" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="ID_Provider" />
+            </Principal>
+            <Dependent Role="Books">
+              <PropertyRef Name="ID_Provider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Books__ID_Publis__2B3F6F97">
+          <End Role="Publisher" Type="Self.Publisher" Multiplicity="0..1" />
+          <End Role="Books" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Publisher">
+              <PropertyRef Name="ID_Publisher" />
+            </Principal>
+            <Dependent Role="Books">
+              <PropertyRef Name="ID_Publisher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Det__ID_Bo__34C8D9D1">
+          <End Role="Books" Type="Self.Book" Multiplicity="1" />
+          <End Role="Order_Detail" Type="Self.Order_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="ID_Book" />
+            </Principal>
+            <Dependent Role="Order_Detail">
+              <PropertyRef Name="ID_Book" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order_Det__ID_Or__33D4B598">
+          <End Role="Orders" Type="Self.Order" Multiplicity="1" />
+          <End Role="Order_Detail" Type="Self.Order_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="ID_Order" />
+            </Principal>
+            <Dependent Role="Order_Detail">
+              <PropertyRef Name="ID_Order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__ID_User__30F848ED">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID_User" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ID_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WebBanSachEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Books" EntityType="Self.Book" />
+          <EntitySet Name="FeedBacks" EntityType="Self.FeedBack" />
+          <EntitySet Name="Genres" EntityType="Self.Genre" />
+          <EntitySet Name="Order_Detail" EntityType="Self.Order_Detail" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Providers" EntityType="Self.Provider" />
+          <EntitySet Name="Publishers" EntityType="Self.Publisher" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="HienThiSachKinhDis" EntityType="Self.HienThiSachKinhDi" />
+          <EntitySet Name="HienThiSachTrinhThams" EntityType="Self.HienThiSachTrinhTham" />
+          <EntitySet Name="ViewModels" EntityType="Self.ViewModel" />
+          <AssociationSet Name="FK__Books__ID_Genre__2A4B4B5E" Association="Self.FK__Books__ID_Genre__2A4B4B5E">
+            <End Role="Genre" EntitySet="Genres" />
+            <End Role="Books" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Books__ID_Provid__2C3393D0" Association="Self.FK__Books__ID_Provid__2C3393D0">
+            <End Role="Provider" EntitySet="Providers" />
+            <End Role="Books" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Books__ID_Publis__2B3F6F97" Association="Self.FK__Books__ID_Publis__2B3F6F97">
+            <End Role="Publisher" EntitySet="Publishers" />
+            <End Role="Books" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Det__ID_Bo__34C8D9D1" Association="Self.FK__Order_Det__ID_Bo__34C8D9D1">
+            <End Role="Books" EntitySet="Books" />
+            <End Role="Order_Detail" EntitySet="Order_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order_Det__ID_Or__33D4B598" Association="Self.FK__Order_Det__ID_Or__33D4B598">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Order_Detail" EntitySet="Order_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__ID_User__30F848ED" Association="Self.FK__Orders__ID_User__30F848ED">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <FunctionImport Name="f_GetAllCart" IsComposable="true" ReturnType="Collection(WebBanSachModel.f_GetAllCart_Result)">
+            <Parameter Name="ID_User" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="f_GetListQL" IsComposable="true" ReturnType="Collection(WebBanSachModel.f_GetListQL_Result)">
+            <Parameter Name="status" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getdangnhap" IsComposable="true" ReturnType="Collection(WebBanSachModel.getdangnhap_Result)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="adduser1" ReturnType="Collection(WebBanSachModel.adduser1_Result)">
+            <Parameter Name="First_Name" Mode="In" Type="String" />
+            <Parameter Name="Last_Name" Mode="In" Type="String" />
+            <Parameter Name="DoB" Mode="In" Type="DateTime" />
+            <Parameter Name="Sex" Mode="In" Type="Boolean" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Passwd" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CapNhatSach">
+            <Parameter Name="ID_Book" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Images" Mode="In" Type="String" />
+            <Parameter Name="Author" Mode="In" Type="String" />
+            <Parameter Name="Release_Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Amount" Mode="In" Type="Int32" />
+            <Parameter Name="Discription" Mode="In" Type="String" />
+            <Parameter Name="Age_Limit" Mode="In" Type="Int32" />
+            <Parameter Name="Price" Mode="In" Type="Double" />
+            <Parameter Name="ID_Genre" Mode="In" Type="Int32" />
+            <Parameter Name="ID_Publisher" Mode="In" Type="Int32" />
+            <Parameter Name="ID_Provider" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="HienThiDanhSachNhaCungCap" ReturnType="Collection(WebBanSachModel.HienThiDanhSachNhaCungCap_Result)" />
+          <FunctionImport Name="HienThiDanhSachNhaSanXuat" ReturnType="Collection(WebBanSachModel.HienThiDanhSachNhaSanXuat_Result)" />
+          <FunctionImport Name="HienThiDanhSachTheLoaiSach" ReturnType="Collection(WebBanSachModel.HienThiDanhSachTheLoaiSach_Result)" />
+          <FunctionImport Name="HienThiSachNgonTinh" ReturnType="Collection(WebBanSachModel.HienThiSachNgonTinh_Result)" />
+          <FunctionImport Name="HienThiSachTieuThuyet" ReturnType="Collection(WebBanSachModel.HienThiSachTieuThuyet_Result)" />
+          <FunctionImport Name="HienThiThongTinSach" ReturnType="Collection(WebBanSachModel.HienThiThongTinSach_Result)" />
+          <FunctionImport Name="LaySach" ReturnType="Collection(WebBanSachModel.LaySach_Result)">
+            <Parameter Name="ID_Book" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="p_AddToCart">
+            <Parameter Name="ID_User" Mode="In" Type="Int32" />
+            <Parameter Name="ID_Book" Mode="In" Type="Int32" />
+            <Parameter Name="Status" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="p_CheckOrder">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="p_DeleteCart">
+            <Parameter Name="ID_User" Mode="In" Type="Int32" />
+            <Parameter Name="ID_Book" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="p_DuyetDonHang">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="status" Mode="In" Type="Int32" />
+            <Parameter Name="puschase" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="p_UpdateCart">
+            <Parameter Name="ID_User" Mode="In" Type="Int32" />
+            <Parameter Name="ID_Book" Mode="In" Type="Int32" />
+            <Parameter Name="Quantity" Mode="In" Type="Int32" />
+            <Parameter Name="BookQuantity" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ThemSachMoi" ReturnType="Collection(WebBanSachModel.ThemSachMoi_Result)">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Images" Mode="In" Type="String" />
+            <Parameter Name="Author" Mode="In" Type="String" />
+            <Parameter Name="Release_Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Amount" Mode="In" Type="Int32" />
+            <Parameter Name="Discription" Mode="In" Type="String" />
+            <Parameter Name="Age_Limit" Mode="In" Type="Int32" />
+            <Parameter Name="Price" Mode="In" Type="Double" />
+            <Parameter Name="ID_Genre" Mode="In" Type="Int32" />
+            <Parameter Name="ID_Publisher" Mode="In" Type="Int32" />
+            <Parameter Name="ID_Provider" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TimKiemThongTin" ReturnType="Collection(WebBanSachModel.TimKiemThongTin_Result)">
+            <Parameter Name="chuoi" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="XoaSach">
+            <Parameter Name="ID_Book" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="XoaSachTrongOrder_Detail">
+            <Parameter Name="ID_Order" Mode="In" Type="Int32" />
+            <Parameter Name="ID_Book" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="HienThiDanhSachNhaCungCap1" EntitySet="Providers" ReturnType="Collection(WebBanSachModel.Provider)" />
+          <FunctionImport Name="HienThiDanhSachNhaSanXuat1" EntitySet="Publishers" ReturnType="Collection(WebBanSachModel.Publisher)" />
+          <FunctionImport Name="HienThiDanhSachTheLoaiSach1" EntitySet="Genres" ReturnType="Collection(WebBanSachModel.Genre)" />
+          <FunctionImport Name="HienThiThongTinSach1" EntitySet="Books" ReturnType="Collection(WebBanSachModel.Book)" />
+          <FunctionImport Name="HienThiSachNgonTinh1" EntitySet="Books" ReturnType="Collection(WebBanSachModel.Book)" />
+          <FunctionImport Name="HienThiSachTieuThuyet1" EntitySet="Books" ReturnType="Collection(WebBanSachModel.Book)" />
+          <FunctionImport Name="TimKiemThongTin1" EntitySet="Books" ReturnType="Collection(WebBanSachModel.Book)">
+            <Parameter Name="chuoi" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="LaySach1" EntitySet="Books" ReturnType="Collection(WebBanSachModel.Book)">
+            <Parameter Name="ID_Book" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="adduser1_Result">
+          <Property Type="Int32" Name="ID_User" Nullable="false" />
+          <Property Type="String" Name="First_Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Last_Name" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="DoB" Nullable="true" />
+          <Property Type="Boolean" Name="Sex" Nullable="true" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="PassWd" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="HienThiDanhSachNhaCungCap_Result">
+          <Property Type="Int32" Name="ID_Provider" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Address_Pro" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="HienThiDanhSachNhaSanXuat_Result">
+          <Property Type="Int32" Name="ID_Publisher" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Infomation" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="HienThiDanhSachTheLoaiSach_Result">
+          <Property Type="Int32" Name="ID_Genre" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="Age_Limit" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="HienThiSachNgonTinh_Result">
+          <Property Type="Int32" Name="ID_Book" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Images" Nullable="true" />
+          <Property Type="String" Name="Author" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Release_Date" Nullable="true" />
+          <Property Type="Int32" Name="Amount" Nullable="true" />
+          <Property Type="String" Name="Discription" Nullable="true" />
+          <Property Type="Int32" Name="Age_Limit" Nullable="true" />
+          <Property Type="Double" Name="Price" Nullable="true" />
+          <Property Type="Int32" Name="ID_Genre" Nullable="true" />
+          <Property Type="Int32" Name="ID_Publisher" Nullable="true" />
+          <Property Type="Int32" Name="ID_Provider" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="HienThiSachTieuThuyet_Result">
+          <Property Type="Int32" Name="ID_Book" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Images" Nullable="true" />
+          <Property Type="String" Name="Author" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Release_Date" Nullable="true" />
+          <Property Type="Int32" Name="Amount" Nullable="true" />
+          <Property Type="String" Name="Discription" Nullable="true" />
+          <Property Type="Int32" Name="Age_Limit" Nullable="true" />
+          <Property Type="Double" Name="Price" Nullable="true" />
+          <Property Type="Int32" Name="ID_Genre" Nullable="true" />
+          <Property Type="Int32" Name="ID_Publisher" Nullable="true" />
+          <Property Type="Int32" Name="ID_Provider" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="HienThiThongTinSach_Result">
+          <Property Type="Int32" Name="ID_Book" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Images" Nullable="true" />
+          <Property Type="String" Name="Author" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Release_Date" Nullable="true" />
+          <Property Type="Int32" Name="Amount" Nullable="true" />
+          <Property Type="String" Name="Discription" Nullable="true" />
+          <Property Type="Int32" Name="Age_Limit" Nullable="true" />
+          <Property Type="Double" Name="Price" Nullable="true" />
+          <Property Type="Int32" Name="ID_Genre" Nullable="true" />
+          <Property Type="Int32" Name="ID_Publisher" Nullable="true" />
+          <Property Type="Int32" Name="ID_Provider" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="LaySach_Result">
+          <Property Type="Int32" Name="ID_Book" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Images" Nullable="true" />
+          <Property Type="String" Name="Author" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Release_Date" Nullable="true" />
+          <Property Type="Int32" Name="Amount" Nullable="true" />
+          <Property Type="String" Name="Discription" Nullable="true" />
+          <Property Type="Int32" Name="Age_Limit" Nullable="true" />
+          <Property Type="Double" Name="Price" Nullable="true" />
+          <Property Type="Int32" Name="ID_Genre" Nullable="true" />
+          <Property Type="Int32" Name="ID_Publisher" Nullable="true" />
+          <Property Type="Int32" Name="ID_Provider" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ThemSachMoi_Result">
+          <Property Type="Int32" Name="ID_Book" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Images" Nullable="true" />
+          <Property Type="String" Name="Author" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Release_Date" Nullable="true" />
+          <Property Type="Int32" Name="Amount" Nullable="true" />
+          <Property Type="String" Name="Discription" Nullable="true" />
+          <Property Type="Int32" Name="Age_Limit" Nullable="true" />
+          <Property Type="Double" Name="Price" Nullable="true" />
+          <Property Type="Int32" Name="ID_Genre" Nullable="true" />
+          <Property Type="Int32" Name="ID_Publisher" Nullable="true" />
+          <Property Type="Int32" Name="ID_Provider" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="TimKiemThongTin_Result">
+          <Property Type="Int32" Name="ID_Book" Nullable="false" />
+          <Property Type="String" Name="Images" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Author" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Release_Date" Nullable="true" />
+          <Property Type="Int32" Name="Amount" Nullable="true" />
+          <Property Type="String" Name="Discription" Nullable="true" />
+          <Property Type="Int32" Name="Age_Limit" Nullable="true" />
+          <Property Type="Double" Name="Price" Nullable="true" />
+          <Property Type="Int32" Name="ID_Genre" Nullable="true" />
+          <Property Type="Int32" Name="ID_Publisher" Nullable="true" />
+          <Property Type="Int32" Name="ID_Provider" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WebBanSachModelStoreContainer" CdmEntityContainer="WebBanSachEntities">
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="WebBanSachModel.Book">
+              <MappingFragment StoreEntitySet="Books">
+                <ScalarProperty Name="ID_Book" ColumnName="ID_Book" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Release_Date" ColumnName="Release_Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Age_Limit" ColumnName="Age_Limit" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ID_Genre" ColumnName="ID_Genre" />
+                <ScalarProperty Name="ID_Publisher" ColumnName="ID_Publisher" />
+                <ScalarProperty Name="ID_Provider" ColumnName="ID_Provider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FeedBacks">
+            <EntityTypeMapping TypeName="WebBanSachModel.FeedBack">
+              <MappingFragment StoreEntitySet="FeedBack">
+                <ScalarProperty Name="ID_FeedBack" ColumnName="ID_FeedBack" />
+                <ScalarProperty Name="Likes" ColumnName="Likes" />
+                <ScalarProperty Name="Cmt_Time" ColumnName="Cmt_Time" />
+                <ScalarProperty Name="Cmt" ColumnName="Cmt" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="WebBanSachModel.Genre">
+              <MappingFragment StoreEntitySet="Genre">
+                <ScalarProperty Name="ID_Genre" ColumnName="ID_Genre" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Age_Limit" ColumnName="Age_Limit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_Detail">
+            <EntityTypeMapping TypeName="WebBanSachModel.Order_Detail">
+              <MappingFragment StoreEntitySet="Order_Detail">
+                <ScalarProperty Name="ID_Order" ColumnName="ID_Order" />
+                <ScalarProperty Name="ID_Book" ColumnName="ID_Book" />
+                <ScalarProperty Name="Book_Name" ColumnName="Book_Name" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="WebBanSachModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="ID_Order" ColumnName="ID_Order" />
+                <ScalarProperty Name="Order_Date" ColumnName="Order_Date" />
+                <ScalarProperty Name="Delivery_Date" ColumnName="Delivery_Date" />
+                <ScalarProperty Name="Order_Status" ColumnName="Order_Status" />
+                <ScalarProperty Name="Puschase" ColumnName="Puschase" />
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Providers">
+            <EntityTypeMapping TypeName="WebBanSachModel.Provider">
+              <MappingFragment StoreEntitySet="Provider">
+                <ScalarProperty Name="ID_Provider" ColumnName="ID_Provider" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address_Pro" ColumnName="Address_Pro" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Publishers">
+            <EntityTypeMapping TypeName="WebBanSachModel.Publisher">
+              <MappingFragment StoreEntitySet="Publisher">
+                <ScalarProperty Name="ID_Publisher" ColumnName="ID_Publisher" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Infomation" ColumnName="Infomation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="WebBanSachModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="DoB" ColumnName="DoB" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PassWd" ColumnName="PassWd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HienThiSachKinhDis">
+            <EntityTypeMapping TypeName="WebBanSachModel.HienThiSachKinhDi">
+              <MappingFragment StoreEntitySet="HienThiSachKinhDi">
+                <ScalarProperty Name="ID_Book" ColumnName="ID_Book" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Release_Date" ColumnName="Release_Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Age_Limit" ColumnName="Age_Limit" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ID_Genre" ColumnName="ID_Genre" />
+                <ScalarProperty Name="ID_Publisher" ColumnName="ID_Publisher" />
+                <ScalarProperty Name="ID_Provider" ColumnName="ID_Provider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HienThiSachTrinhThams">
+            <EntityTypeMapping TypeName="WebBanSachModel.HienThiSachTrinhTham">
+              <MappingFragment StoreEntitySet="HienThiSachTrinhTham">
+                <ScalarProperty Name="ID_Book" ColumnName="ID_Book" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Release_Date" ColumnName="Release_Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Age_Limit" ColumnName="Age_Limit" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ID_Genre" ColumnName="ID_Genre" />
+                <ScalarProperty Name="ID_Publisher" ColumnName="ID_Publisher" />
+                <ScalarProperty Name="ID_Provider" ColumnName="ID_Provider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewModels">
+            <EntityTypeMapping TypeName="WebBanSachModel.ViewModel">
+              <MappingFragment StoreEntitySet="ViewModel">
+                <ScalarProperty Name="ID_Order" ColumnName="ID_Order" />
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="Order_Status" ColumnName="Order_Status" />
+                <ScalarProperty Name="Order_Date" ColumnName="Order_Date" />
+                <ScalarProperty Name="Delivery_Date" ColumnName="Delivery_Date" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="WebBanSachModel.Store.f_GetAllCart" FunctionImportName="f_GetAllCart">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WebBanSachModel.f_GetAllCart_Result">
+                <ScalarProperty Name="ID_Book" ColumnName="ID_Book" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="WebBanSachModel.Store.f_GetListQL" FunctionImportName="f_GetListQL">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WebBanSachModel.f_GetListQL_Result">
+                <ScalarProperty Name="ID_Order" ColumnName="ID_Order" />
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="Order_Status" ColumnName="Order_Status" />
+                <ScalarProperty Name="Order_Date" ColumnName="Order_Date" />
+                <ScalarProperty Name="Delivery_Date" ColumnName="Delivery_Date" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="WebBanSachModel.Store.getdangnhap" FunctionImportName="getdangnhap">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WebBanSachModel.getdangnhap_Result">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Passwd" ColumnName="Passwd" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="adduser1" FunctionName="WebBanSachModel.Store.adduser1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WebBanSachModel.adduser1_Result">
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="DoB" ColumnName="DoB" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PassWd" ColumnName="PassWd" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CapNhatSach" FunctionName="WebBanSachModel.Store.CapNhatSach" />
+          <FunctionImportMapping FunctionImportName="HienThiDanhSachNhaCungCap" FunctionName="WebBanSachModel.Store.HienThiDanhSachNhaCungCap">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WebBanSachModel.HienThiDanhSachNhaCungCap_Result">
+                <ScalarProperty Name="ID_Provider" ColumnName="ID_Provider" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address_Pro" ColumnName="Address_Pro" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="HienThiDanhSachNhaSanXuat" FunctionName="WebBanSachModel.Store.HienThiDanhSachNhaSanXuat">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WebBanSachModel.HienThiDanhSachNhaSanXuat_Result">
+                <ScalarProperty Name="ID_Publisher" ColumnName="ID_Publisher" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Infomation" ColumnName="Infomation" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="HienThiDanhSachTheLoaiSach" FunctionName="WebBanSachModel.Store.HienThiDanhSachTheLoaiSach">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WebBanSachModel.HienThiDanhSachTheLoaiSach_Result">
+                <ScalarProperty Name="ID_Genre" ColumnName="ID_Genre" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Age_Limit" ColumnName="Age_Limit" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="HienThiSachNgonTinh" FunctionName="WebBanSachModel.Store.HienThiSachNgonTinh">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WebBanSachModel.HienThiSachNgonTinh_Result">
+                <ScalarProperty Name="ID_Book" ColumnName="ID_Book" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Release_Date" ColumnName="Release_Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Age_Limit" ColumnName="Age_Limit" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ID_Genre" ColumnName="ID_Genre" />
+                <ScalarProperty Name="ID_Publisher" ColumnName="ID_Publisher" />
+                <ScalarProperty Name="ID_Provider" ColumnName="ID_Provider" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="HienThiSachTieuThuyet" FunctionName="WebBanSachModel.Store.HienThiSachTieuThuyet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WebBanSachModel.HienThiSachTieuThuyet_Result">
+                <ScalarProperty Name="ID_Book" ColumnName="ID_Book" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Release_Date" ColumnName="Release_Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Age_Limit" ColumnName="Age_Limit" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ID_Genre" ColumnName="ID_Genre" />
+                <ScalarProperty Name="ID_Publisher" ColumnName="ID_Publisher" />
+                <ScalarProperty Name="ID_Provider" ColumnName="ID_Provider" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="HienThiThongTinSach" FunctionName="WebBanSachModel.Store.HienThiThongTinSach">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WebBanSachModel.HienThiThongTinSach_Result">
+                <ScalarProperty Name="ID_Book" ColumnName="ID_Book" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Release_Date" ColumnName="Release_Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Age_Limit" ColumnName="Age_Limit" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ID_Genre" ColumnName="ID_Genre" />
+                <ScalarProperty Name="ID_Publisher" ColumnName="ID_Publisher" />
+                <ScalarProperty Name="ID_Provider" ColumnName="ID_Provider" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LaySach" FunctionName="WebBanSachModel.Store.LaySach">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WebBanSachModel.LaySach_Result">
+                <ScalarProperty Name="ID_Book" ColumnName="ID_Book" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Release_Date" ColumnName="Release_Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Age_Limit" ColumnName="Age_Limit" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ID_Genre" ColumnName="ID_Genre" />
+                <ScalarProperty Name="ID_Publisher" ColumnName="ID_Publisher" />
+                <ScalarProperty Name="ID_Provider" ColumnName="ID_Provider" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="p_AddToCart" FunctionName="WebBanSachModel.Store.p_AddToCart" />
+          <FunctionImportMapping FunctionImportName="p_CheckOrder" FunctionName="WebBanSachModel.Store.p_CheckOrder" />
+          <FunctionImportMapping FunctionImportName="p_DeleteCart" FunctionName="WebBanSachModel.Store.p_DeleteCart" />
+          <FunctionImportMapping FunctionImportName="p_DuyetDonHang" FunctionName="WebBanSachModel.Store.p_DuyetDonHang" />
+          <FunctionImportMapping FunctionImportName="p_UpdateCart" FunctionName="WebBanSachModel.Store.p_UpdateCart" />
+          <FunctionImportMapping FunctionImportName="ThemSachMoi" FunctionName="WebBanSachModel.Store.ThemSachMoi">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WebBanSachModel.ThemSachMoi_Result">
+                <ScalarProperty Name="ID_Book" ColumnName="ID_Book" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Release_Date" ColumnName="Release_Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Age_Limit" ColumnName="Age_Limit" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ID_Genre" ColumnName="ID_Genre" />
+                <ScalarProperty Name="ID_Publisher" ColumnName="ID_Publisher" />
+                <ScalarProperty Name="ID_Provider" ColumnName="ID_Provider" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TimKiemThongTin" FunctionName="WebBanSachModel.Store.TimKiemThongTin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WebBanSachModel.TimKiemThongTin_Result">
+                <ScalarProperty Name="ID_Book" ColumnName="ID_Book" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Release_Date" ColumnName="Release_Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Age_Limit" ColumnName="Age_Limit" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ID_Genre" ColumnName="ID_Genre" />
+                <ScalarProperty Name="ID_Publisher" ColumnName="ID_Publisher" />
+                <ScalarProperty Name="ID_Provider" ColumnName="ID_Provider" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="XoaSach" FunctionName="WebBanSachModel.Store.XoaSach" />
+          <FunctionImportMapping FunctionImportName="XoaSachTrongOrder_Detail" FunctionName="WebBanSachModel.Store.XoaSachTrongOrder_Detail" />
+          <FunctionImportMapping FunctionImportName="HienThiDanhSachNhaCungCap1" FunctionName="WebBanSachModel.Store.HienThiDanhSachNhaCungCap" />
+          <FunctionImportMapping FunctionImportName="HienThiDanhSachNhaSanXuat1" FunctionName="WebBanSachModel.Store.HienThiDanhSachNhaSanXuat" />
+          <FunctionImportMapping FunctionImportName="HienThiDanhSachTheLoaiSach1" FunctionName="WebBanSachModel.Store.HienThiDanhSachTheLoaiSach" />
+          <FunctionImportMapping FunctionImportName="HienThiThongTinSach1" FunctionName="WebBanSachModel.Store.HienThiThongTinSach" />
+          <FunctionImportMapping FunctionImportName="HienThiSachNgonTinh1" FunctionName="WebBanSachModel.Store.HienThiSachNgonTinh" />
+          <FunctionImportMapping FunctionImportName="HienThiSachTieuThuyet1" FunctionName="WebBanSachModel.Store.HienThiSachTieuThuyet" />
+          <FunctionImportMapping FunctionImportName="TimKiemThongTin1" FunctionName="WebBanSachModel.Store.TimKiemThongTin" />
+          <FunctionImportMapping FunctionImportName="LaySach1" FunctionName="WebBanSachModel.Store.LaySach" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

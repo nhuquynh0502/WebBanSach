@@ -1,0 +1,99 @@
+﻿
+@model WebBanSach.ViewModels.SuaSachViewModel
+
+@{
+    ViewBag.Title = "TrangSuaSach";
+}
+
+
+<div class="container d-flex flex-column align-items-center" role="alert">
+    <h2 class="mt-5 mb-4">CHỈNH SỬA SÁCH</h2>
+    <form action="/Home/TrangSuaSach" method="post" style="width:500px">
+        @Html.Hidden("ID_Book", Model.Book.ID_Book)
+
+        <div class="form-group form-row">
+            <label>Tên sách</label>
+            <input type="text" value="@Model.Book.Name" placeholder="Tên sách" class="form-control" name="Name" />
+        </div>
+        <div class="form-group form-row">
+            <label>Hình ảnh</label>
+            <input type="text" value="@Model.Book.Images" placeholder="Link ảnh sách" class="form-control" name="Images" />
+        </div>
+        <div class="form-group form-row">
+            <label>Tên tác giả</label>
+            <input type="text" value="@Model.Book.Author" placeholder="Tên tác giả" class="form-control" name="Author" />
+        </div>
+        <div class="form-group form-row">
+            <label>Ngày phát hành</label>
+            <input type="date" value="@Model.Book.Release_Date.Value.ToString("yyyy-MM-dd")" placeholder="Ngày phát hành" class="form-control" name="Release_Date" />
+        </div>
+        <div class="form-group form-row">
+            <label>Nhập số lượng sách</label>
+            <input type="text" value="@Model.Book.Amount" placeholder="Nhập số lượng sách" class="form-control" name="Amount" />
+        </div>
+        <div class="form-group form-row">
+            <label>Mô tả</label>
+            <textarea rows="3" placeholder="Mô tả" class="form-control" name="Discription">@Model.Book.Discription</textarea>
+        </div>
+        <div class="form-group form-row">
+            <label>Tuổi giới hạn</label>
+            <input type="text" value="@Model.Book.Age_Limit" placeholder="Tuổi giới hạn" class="form-control" name="Age_Limit" />
+        </div>
+        <div class="form-group form-row">
+            <label>Giá</label>
+            <input type="text" value="@Model.Book.Price" placeholder="Giá" class="form-control" name="Price" />
+        </div>
+        <div class="form-group form-row">
+            <label>Thể loại</label>
+            <select class="form-control" name="ID_Genre" value="@Model.Book.ID_Genre">
+                @foreach (var item in Model.Genres)
+                {
+                    if (item.ID_Genre == Model.Book.ID_Genre)
+                    {
+
+                        <option value="@item.ID_Genre" selected>@item.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@item.ID_Genre">@item.Name</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group form-row">
+            <label>Nhà sản xuất</label>
+            <select class="form-control" name="ID_Publisher" value="@Model.Book.ID_Publisher">
+                @foreach (var item in Model.Publishers)
+                {
+                    if (item.ID_Publisher == Model.Book.ID_Publisher)
+                    {
+                        <option value="@item.ID_Publisher" selected>@item.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@item.ID_Publisher">@item.Name</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group form-row">
+            <label>Nhà cung cấp</label>
+            <select class="form-control" name="ID_Provider" value="@Model.Book.ID_Provider">
+                @foreach (var item in Model.Providers)
+                {
+                    if (item.ID_Provider == Model.Book.ID_Provider)
+                    {
+                        <option value="@item.ID_Provider" selected>@item.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@item.ID_Provider">@item.Name</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group form-row">
+            <button type="submit" class="btn btn-primary ml-auto" style="width:150px">Sửa sách</button>
+        </div>
+    </form>
+</div>

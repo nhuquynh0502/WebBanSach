@@ -1,0 +1,35 @@
+﻿@model IEnumerable<WebBanSach.Models.QuanLyViewModel>
+@{
+    ViewBag.Title = "DoiTra";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 10);
+}
+<link rel="stylesheet" href="~/Content/css/QuanLy.css">
+<h3>Quản lý đơn hàng</h3>
+
+<ul class="nav nav-tabs">
+    <li role="presentation"><a href="@Url.Action("DaDat","QuanLy")">Đã đặt hàng</a></li>
+    <li role="presentation"><a href="@Url.Action("DaGiao","QuanLy")">Đã giao hàng</a></li>
+    <li role="presentation"><a href="@Url.Action("DaHuy","QuanLy")">Đã hủy</a></li>
+    <li role="presentation" class="active"><a href="@Url.Action("DoiTra","QuanLy")">Đổi trả</a></li>
+</ul>
+
+<div class="container">
+    @grid.GetHtml(
+        tableStyle: "gridTable",
+        headerStyle: "gridHeard",
+        footerStyle: "gridFooter",
+        rowStyle: "gridRow",
+        alternatingRowStyle: "gridAltRow",
+        columns: grid.Columns(
+            grid.Column("ID_Order", header: "Mã đơn hàng"),
+            grid.Column("ID_User", header: "Mã khách hàng"),
+            grid.Column("First_Name", header: "Tên khách hàng"),
+            grid.Column("Last_Name", header: "Họ"),
+            grid.Column("Order_Date", header: "Ngày đặt hàng"),
+            grid.Column("Delivery_Date", header: "Ngày giao"),
+            grid.Column("Order_Status", header: "Tình trạng"),
+            grid.Column("Duyệt đơn hàng", format: p => @Html.ActionLink("Duyệt đơn hàng", "DuyetDonHang", "QuanLy", new { @id = p.ID_Order }, null))
+        )
+    )
+</div>

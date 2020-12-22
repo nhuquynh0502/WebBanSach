@@ -1,0 +1,78 @@
+﻿
+@*@model WebBanSach.User*@
+@{
+    ViewBag.Title = "DangKy";
+}
+
+<div class="d-flex flex-column align-items-center mt-4">
+    <h2 class="mb-4">ĐĂNG KÝ</h2>
+
+    <form action="/Home/DangKy" method="post" style="width:500px">
+        @*@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+            <div class="form-group form-row">
+                <div class="col-12 alert alert-danger">
+                    <div class="col-12">
+                        @ViewBag.ErrorMessage
+                    </div>
+                </div>
+            </div>
+        }*@
+        <div class="form-group form-row">
+            <label>Họ</label>
+            <input type="text" value="" placeholder="Họ" class="form-control" name="Fisrt_Name" />
+        </div>
+        <div class="form-group form-row">
+            <label>Tên</label>
+            <input type="text" value="" placeholder="Tên" class="form-control" name="Last_Name" />
+        </div>
+
+        <div class="form-group form-row">
+            <label>Tên đăng nhập</label>
+            <input type="text" value="" placeholder="Tên đăng nhập" class="form-control" name="UserName" />
+        </div>
+
+        <div class="form-group form-row">
+            <label>Mật khẩu</label>
+            <input type="password" value="" placeholder="Mật khẩu" class="form-control" name="PassWd" />
+        </div>
+
+        <div class="form-group form-row">
+            <label>Ngày sinh</label>
+            <input type="date" value="" placeholder="Ngày sinh" class="form-control" name="DoB" />
+        </div>
+
+        <div class="form-group form-row">
+            <label>Giới tính</label>
+            <label class="mx-auto">
+                Nam
+                <input type="radio" checked name="Sex" value="true" />
+            </label>
+            <label class="mx-auto">
+                Nữ
+                <input type="radio" name="Sex" value="false" />
+            </label>
+        </div>
+
+        <div class="form-group form-row">
+            <label>Địa chỉ</label>
+            <input type="text" value="" placeholder="Địa chỉ" class="form-control" name="Address" />
+        </div>
+
+        <div class="form-group form-row">
+            <label>Số điện thoại</label>
+            <input type="number" value="" placeholder="Số điện thoại" class="form-control" name="Phone" />
+        </div>
+
+        <div class="form-group form-row">
+            <label>Email</label>
+            <input type="email" value="" placeholder="Email" class="form-control" name="Email" />
+        </div>
+
+        <div class="form-group form-row">
+            <a href="/Home" class="mr-auto">Hủy</a>
+            <button type="submit" class="btn btn-primary" style="width:110px">Đăng ký</button>
+        </div>
+    </form>
+</div>
+

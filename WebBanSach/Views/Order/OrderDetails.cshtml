@@ -1,0 +1,55 @@
+﻿@model WebBanSach.User
+@{
+    ViewBag.Title = "OrderDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<WebBanSach.Models.ItemGioHang> lstGH = ViewBag.GioHang as List<WebBanSach.Models.ItemGioHang>;
+}
+<h3>Thông tin khách hàng</h3>
+<div class="info">
+    <h5>Họ: @Model.Last_Name</h5>
+    <h5>Tên: @Model.First_Name</h5>
+    <h5>Số điện thoại: @Model.Phone</h5>
+    <h5>Địa chỉ: @Model.Address</h5>
+    <h5>Ngày đặt: @DateTime.Now.Date.ToString("dd/MM/yyyy")</h5>
+    <h5>Ngày giao: 3-5 ngày làm việc</h5>
+    <h5>Tổng tiền thanh toán: @(((int)@ViewBag.Total).ToString("#,##"))</h5>
+</div>
+<h3>Chi tiết đơn hàng</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <td>Mã sách</td>
+            <td>Tên sách</td>
+            <td>Hình ảnh</td>
+            <td>Số lượng</td>
+            <td>Giá</td>
+            <td>Thành tiền</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in lstGH)
+        {
+            <tr>
+                <td>@i.Id</td>
+                <td>@i.Name</td>
+                <td><img src="@Url.Content("~/Content/images/"+ i.Image)" style="width:60px;height:90px;" /></td>
+                <td>@i.Quantity</td>
+                <td>@i.Price.ToString("#,##")</td>
+                <td>@i.Total.ToString("#,##")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="order">
+    @using (Html.BeginForm("DatHang", "Order"))
+    {
+        <button type="submit" class="btn-success" id="btnOrder">Tiếp tục</button>
+    }
+</div>
+<style>
+    #btnOrder {
+        float: right;
+        width: 100px;
+        height: 40px;
+    }
+</style>
