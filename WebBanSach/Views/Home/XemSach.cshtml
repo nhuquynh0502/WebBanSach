@@ -1,23 +1,16 @@
 ﻿
 @model List<WebBanSach.Book>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "XemSach";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<div class="alert alert-primary py-4">
-    <div class="container d-flex align-items-center" role="alert">
-        <div class="d-flex flex-column align-items-center mx-auto">
-            <h2>HỆ THỐNG BÁN SÁCH ONLINE</h2>
-            <h6>Quận Thủ Đức, TPHCM - Điện thoại: (84-8) 37221223</h6>
-        </div>
-    </div>
-</div>
 
 <div class="container" role="alert">
     <form action="/Home/TrangQuanLySach" method="post" style="width: 100%">
         <div class="form-group form-row mt-4">
             <b><label class="col">Tìm kiếm</label></b>
             <input type="text" value="@ViewBag.value" class="form-control col" placeholder="Tìm kiếm" name="chuoi" />
+
         </div>
     </form>
 
@@ -31,15 +24,28 @@
                 <div class="book-name mt-3">
                     <h5>@book.Name</h5>
                 </div>
+                <div class="book-author">
+                    Tác giả:
+                    @book.Author
+                </div>
                 <div class="book-discription">
                     Mô tả:
                     @book.Discription
+                </div>
+                <div class="book-agelimit">
+                    Tuổi giới hạn:
+                    @book.Age_Limit
                 </div>
                 <div class="book-price">
                     Giá:
                     @book.Price.Value.ToString("#,##")
                     VND
                 </div>
+                @Html.ActionLink("Thêm vào giỏ hàng", "ThemGioHang", "Order", new { id = book.ID_Book, strUrl = Request.Url.ToString() }, null)
+
             </div>
         }
     </div>
+</div>
+
+

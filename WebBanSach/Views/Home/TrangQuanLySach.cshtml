@@ -29,14 +29,18 @@
     <form action="/Home/TrangQuanLySach" method="post" style="width: 100%">
         <div class="form-group form-row mt-4">
             <b><label class="col">Tìm kiếm</label></b>
-            <input type="text" value="@ViewBag.value" class="form-control col" placeholder="Tìm kiếm" name="chuoi"/>
+            <input type="text" value="@ViewBag.value" class="form-control col" placeholder="Tìm kiếm" name="chuoi" />
+
         </div>
     </form>
-    
-
+    <form action="/Home/TrangThemSach" method="get">
+        <div class="form-group form-row justify-content-end">
+            <button type="submit" class="btn btn-primary mb-3" style="width:140px">Thêm sách mới</button>
+        </div>
+    </form>
 
     <div class="row">
-        @foreach(var book in Model)
+        @foreach (var book in Model)
         {
             <div class="col-4 mb-5">
                 <div class="book-image">
@@ -73,7 +77,7 @@
                 <div>
                     <form action="/Home/XoaSach/@book.ID_Book" method="post">
                         <button type="submit" class="btn btn-block ml-5">
-                            <img src="~/Images/Xoa.jpg" alt="" height="30"/>
+                            <img src="~/Images/Xoa.jpg" alt="" height="30" />
                         </button>
                     </form>
                 </div>

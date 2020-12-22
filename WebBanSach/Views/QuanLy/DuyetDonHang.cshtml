@@ -10,7 +10,7 @@
 @using (Html.BeginForm())
 {
 
-    <div class="table">
+    <div class="container" role="alert">
         <table class="table" id="table">
             <tr>
                 <td>Mã đơn hàng:<b style="color:brown;">@Model.ID_Order @Html.Hidden("ID_Order", Model.ID_Order)</b></td>
@@ -50,7 +50,7 @@
                     </table>
                 </td>
             </tr>
-            <tr>
+            <tr class="font-weight-bold">
                 <td>Sách</td>
                 <td>Hình ảnh</td>
                 <td>Số lượng</td>

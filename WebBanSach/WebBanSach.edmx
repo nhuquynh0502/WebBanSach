@@ -333,6 +333,8 @@ warning 6002: The table/view 'WebBanSach.dbo.ViewModel' does not have a primary 
           <Parameter Name="status" Type="int" Mode="In" />
           <Parameter Name="puschase" Type="bit" Mode="In" />
         </Function>
+        <Function Name="p_HienThiSachKinhDi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="p_HienThiSachTrinhTham" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="p_UpdateCart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID_User" Type="int" Mode="In" />
           <Parameter Name="ID_Book" Type="int" Mode="In" />
@@ -828,6 +830,10 @@ warning 6002: The table/view 'WebBanSach.dbo.ViewModel' does not have a primary 
           <FunctionImport Name="LayQuyenUser" ReturnType="Collection(Int32)">
           <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="p_HienThiSachKinhDi" ReturnType="Collection(WebBanSachModel.p_HienThiSachKinhDi_Result)" />
+          <FunctionImport Name="p_HienThiSachTrinhTham" ReturnType="Collection(WebBanSachModel.p_HienThiSachTrinhTham_Result)" />
+          <FunctionImport Name="p_HienThiSachKinhDi1" EntitySet="Books" ReturnType="Collection(WebBanSachModel.Book)" />
+          <FunctionImport Name="p_HienThiSachTrinhTham1" EntitySet="Books" ReturnType="Collection(WebBanSachModel.Book)" />
         </EntityContainer>
         <ComplexType Name="adduser1_Result">
           <Property Type="Int32" Name="ID_User" Nullable="false" />
@@ -954,6 +960,34 @@ warning 6002: The table/view 'WebBanSach.dbo.ViewModel' does not have a primary 
           <Property Type="String" Name="UserName" Nullable="true" MaxLength="250" />
           <Property Type="String" Name="PassWd" Nullable="true" MaxLength="250" />
           <Property Type="Int32" Name="Permisson" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="p_HienThiSachKinhDi_Result">
+          <Property Type="Int32" Name="ID_Book" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Images" Nullable="true" />
+          <Property Type="String" Name="Author" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Release_Date" Nullable="true" />
+          <Property Type="Int32" Name="Amount" Nullable="true" />
+          <Property Type="String" Name="Discription" Nullable="true" />
+          <Property Type="Int32" Name="Age_Limit" Nullable="true" />
+          <Property Type="Double" Name="Price" Nullable="true" />
+          <Property Type="Int32" Name="ID_Genre" Nullable="true" />
+          <Property Type="Int32" Name="ID_Publisher" Nullable="true" />
+          <Property Type="Int32" Name="ID_Provider" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="p_HienThiSachTrinhTham_Result">
+          <Property Type="Int32" Name="ID_Book" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Images" Nullable="true" />
+          <Property Type="String" Name="Author" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="Release_Date" Nullable="true" />
+          <Property Type="Int32" Name="Amount" Nullable="true" />
+          <Property Type="String" Name="Discription" Nullable="true" />
+          <Property Type="Int32" Name="Age_Limit" Nullable="true" />
+          <Property Type="Double" Name="Price" Nullable="true" />
+          <Property Type="Int32" Name="ID_Genre" Nullable="true" />
+          <Property Type="Int32" Name="ID_Publisher" Nullable="true" />
+          <Property Type="Int32" Name="ID_Provider" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1327,6 +1361,44 @@ warning 6002: The table/view 'WebBanSach.dbo.ViewModel' does not have a primary 
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="LayQuyenUser" FunctionName="WebBanSachModel.Store.LayQuyenUser" />
+          <FunctionImportMapping FunctionImportName="p_HienThiSachKinhDi" FunctionName="WebBanSachModel.Store.p_HienThiSachKinhDi">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WebBanSachModel.p_HienThiSachKinhDi_Result">
+                <ScalarProperty Name="ID_Book" ColumnName="ID_Book" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Release_Date" ColumnName="Release_Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Age_Limit" ColumnName="Age_Limit" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ID_Genre" ColumnName="ID_Genre" />
+                <ScalarProperty Name="ID_Publisher" ColumnName="ID_Publisher" />
+                <ScalarProperty Name="ID_Provider" ColumnName="ID_Provider" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="p_HienThiSachTrinhTham" FunctionName="WebBanSachModel.Store.p_HienThiSachTrinhTham">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WebBanSachModel.p_HienThiSachTrinhTham_Result">
+                <ScalarProperty Name="ID_Book" ColumnName="ID_Book" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Release_Date" ColumnName="Release_Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Age_Limit" ColumnName="Age_Limit" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ID_Genre" ColumnName="ID_Genre" />
+                <ScalarProperty Name="ID_Publisher" ColumnName="ID_Publisher" />
+                <ScalarProperty Name="ID_Provider" ColumnName="ID_Provider" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="p_HienThiSachKinhDi1" FunctionName="WebBanSachModel.Store.p_HienThiSachKinhDi" />
+          <FunctionImportMapping FunctionImportName="p_HienThiSachTrinhTham1" FunctionName="WebBanSachModel.Store.p_HienThiSachTrinhTham" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

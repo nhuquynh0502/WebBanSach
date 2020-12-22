@@ -206,6 +206,12 @@
     <Compile Include="Publisher.cs">
       <DependentUpon>WebBanSach.tt</DependentUpon>
     </Compile>
+    <Compile Include="p_HienThiSachKinhDi_Result.cs">
+      <DependentUpon>WebBanSach.tt</DependentUpon>
+    </Compile>
+    <Compile Include="p_HienThiSachTrinhTham_Result.cs">
+      <DependentUpon>WebBanSach.tt</DependentUpon>
+    </Compile>
     <Compile Include="ThemSachMoi_Result.cs">
       <DependentUpon>WebBanSach.tt</DependentUpon>
     </Compile>
@@ -416,6 +422,7 @@
       <DependentUpon>WebBanSach.edmx</DependentUpon>
     </Content>
     <Content Include="Views\Home\TrangNguoiDung.cshtml" />
+    <Content Include="Views\Home\XemSach.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

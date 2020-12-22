@@ -16,7 +16,26 @@ namespace WebBanSach.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            try
+            {
+                var data = webBanSach.HienThiThongTinSach1().ToList();
+                return View(data);
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        public ActionResult XemSach(int id)
+        {
+            switch(id)
+            {
+                case 1: return View(webBanSach.p_HienThiSachKinhDi1().ToList());
+                case 2: return View(webBanSach.HienThiSachTieuThuyet1().ToList());
+                case 3: return View(webBanSach.p_HienThiSachTrinhTham1().ToList());
+                case 4: return View(webBanSach.HienThiSachNgonTinh1().ToList());
+                default: return View("TrangNguoiDung");
+            }    
         }
         public ActionResult TrangNguoiDung()
         {

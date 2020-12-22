@@ -6,55 +6,63 @@
 
 @*<h2>TrangSachKinhDi</h2>*@
 
-@*Tìm kiếm
-    Hiển thị thông 1 số loại sách thuộc thể loại kinh dị
-    Nút xem thêm
-    Bấm vào từng loại sách để thêm xóa sửa*@
-
 <div class="container" role="alert">
-    <form action="/Home/TrangQuanLySach" method="post" style="width: 100%">
+    <form action="/Home/TrangSachKinhDi" method="post" style="width: 100%">
         <div class="form-group form-row mt-4">
             <b><label class="col">Tìm kiếm</label></b>
-            <input type="text" value="@ViewBag.value" class="form-control col" placeholder="Tìm kiếm" name="chuoi"/>
+            <input type="text" value="@ViewBag.value" class="form-control col" placeholder="Tìm kiếm" name="chuoi" />
+        </div>
+    </form>
+
+    <form action="/Home/TrangThemSach" method="get">
+        <div class="form-group form-row justify-content-end">
+            <button type="submit" class="btn btn-primary mb-3" style="width:140px">Thêm sách mới</button>
         </div>
     </form>
 
     <div class="row">
         @foreach (var book in Model)
         {
-            <div class="col-4 mb-5">
-                <div class="book-image">
-                    <img src="@book.Images" alt="" width=300px height=350px />
-                </div>
-                <div class="book-name mt-3">
-                    <h5>@book.Name</h5>
-                </div>
-                <div class="book-author">
-                    Tác giả:
-                    @book.Author
-                </div>
-                <div class="book-releasedate">
-                    Ngày phát hành:
-                    @book.Release_Date.Value.ToShortDateString()
-                </div>
-                <div class="book-amount">
-                    Số lượng:
-                    @book.Amount
-                </div>
-                <div class="book-discription">
-                    Mô tả:
-                    @book.Discription
-                </div>
-                <div class="book-agelimit">
-                    Tuổi giới hạn:
-                    @book.Age_Limit
-                </div>
-                <div class="book-price">
-                    Giá:
-                    @book.Price
-                    nghìn
-                </div>
+        <div class="col-4 mb-5">
+            <div class="book-image">
+                <img src="@book.Images" alt="" width=300px height=350px />
             </div>
-         }
+            <div class="book-name mt-3">
+                <a href="/Home/TrangSuaSach/@book.ID_Book"><h5>@book.Name</h5></a>
+            </div>
+            <div class="book-author">
+                Tác giả:
+                @book.Author
+            </div>
+            <div class="book-releasedate">
+                Ngày phát hành:
+                @book.Release_Date.Value.ToString("yyyy-MM-dd")
+            </div>
+            <div class="book-amount">
+                Số lượng:
+                @book.Amount
+            </div>
+            <div class="book-discription">
+                Mô tả:
+                @book.Discription
+            </div>
+            <div class="book-agelimit">
+                Tuổi giới hạn:
+                @book.Age_Limit
+            </div>
+            <div class="book-price">
+                Giá:
+                @book.Price
+                VND
+            </div>
+            <div>
+                <form action="/Home/XoaSach/@book.ID_Book" method="post">
+                    <button type="submit" class="btn btn-block ml-5">
+                        <img src="~/Images/Xoa.jpg" alt="" height="30" />
+                    </button>
+                </form>
+            </div>
+        </div>
+        }
     </div>
 </div>

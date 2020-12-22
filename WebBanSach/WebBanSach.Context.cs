@@ -476,5 +476,35 @@ namespace WebBanSach
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("LayQuyenUser", idParameter);
         }
+    
+        public virtual ObjectResult<p_HienThiSachKinhDi_Result> p_HienThiSachKinhDi()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<p_HienThiSachKinhDi_Result>("p_HienThiSachKinhDi");
+        }
+    
+        public virtual ObjectResult<p_HienThiSachTrinhTham_Result> p_HienThiSachTrinhTham()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<p_HienThiSachTrinhTham_Result>("p_HienThiSachTrinhTham");
+        }
+    
+        public virtual ObjectResult<Book> p_HienThiSachKinhDi1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Book>("p_HienThiSachKinhDi1");
+        }
+    
+        public virtual ObjectResult<Book> p_HienThiSachKinhDi1(MergeOption mergeOption)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Book>("p_HienThiSachKinhDi1", mergeOption);
+        }
+    
+        public virtual ObjectResult<Book> p_HienThiSachTrinhTham1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Book>("p_HienThiSachTrinhTham1");
+        }
+    
+        public virtual ObjectResult<Book> p_HienThiSachTrinhTham1(MergeOption mergeOption)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Book>("p_HienThiSachTrinhTham1", mergeOption);
+        }
     }
 }
