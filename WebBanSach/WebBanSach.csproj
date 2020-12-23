@@ -423,6 +423,7 @@
     </Content>
     <Content Include="Views\Home\TrangNguoiDung.cshtml" />
     <Content Include="Views\Home\XemSach.cshtml" />
+    <Content Include="Views\Message\ThongBaoDatHang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,16 +1,18 @@
 ﻿@using WebBanSach.Models
 @model Order
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-@{
-    ViewBag.Title = "DuyetDonHang";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    List<Order_Detail> lstod = ViewBag.Order_Detail as List<Order_Detail>;
-    List<string> lstStatus = new List<string> { "Hủy", "Đã đặt hàng", "Đã giao hàng", "Đổi trả" };
-}
+<div class="container  mb-4" role="alert">
+    @{
+        ViewBag.Title = "DuyetDonHang";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        List<Order_Detail> lstod = ViewBag.Order_Detail as List<Order_Detail>;
+        List<string> lstStatus = new List<string> { "Hủy", "Đã đặt hàng", "Đã giao hàng", "Đổi trả" };
+    }
+</div>
 @using (Html.BeginForm())
 {
 
-    <div class="container" role="alert">
+    <div class="container " role="alert">
         <table class="table" id="table">
             <tr>
                 <td>Mã đơn hàng:<b style="color:brown;">@Model.ID_Order @Html.Hidden("ID_Order", Model.ID_Order)</b></td>
@@ -60,16 +62,16 @@
             {
                 <tr>
                     <td>@item.Book.Name</td>
-                    <td><img src="@Url.Content("~/Content/images/" + item.Book.Images)" style="width:60px;height:90px;" /></td>
+                    <td><img src="@Url.Content(item.Book.Images)" style="width:60px;height:90px;" /></td>
                     <td>@item.Quantity</td>
                     <td>@item.Price.Value.ToString("#,##")</td>
                 </tr>
             }
             <tr>
-                <td>Tổng số lượng: @Model.Order_Detail.(n => n.Quantity)</td>
+                <td>Tổng số lượng: @Model.Order_Detail.Sum(n => n.Quantity)</td>
             </tr>
             <tr>
-                <td>Thanh toán: @Model.Order_Detail.(n => n.Price).Value.ToString("#,##") VND</td>
+                <td>Thanh toán: @Model.Order_Detail.Sum(n => n.Price).Value.ToString("#,##") VND</td>
             </tr>
         </table>
         <input type="button" value="In đơn hàng" id="btnPrint" class="btn-success" />

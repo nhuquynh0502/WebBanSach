@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@Html.Action("GioHangPartial", "Order")
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container collapse navbar-collapse d-flex alert alert-primary">
         <ul class="navbar-nav">
@@ -35,29 +35,29 @@
     <div class="row">
         @foreach (var book in Model)
         {
-        <div class="col-4 mb-5">
-            <div class="book-image">
-                <img src="@book.Images" alt="" width=300px height=350px />
-            </div>
-            <div class="book-name mt-3">
-                <h5>@book.Name</h5>
-            </div>
-            <div class="book-discription">
-                Mô tả:
-                @book.Discription
-            </div>
-            <div class="book-agelimit">
-                Tuổi giới hạn:
-                @book.Age_Limit
-            </div>
-            <div class="book-price">
-                Giá:
-                @book.Price.Value.ToString("#,##")
-                VND
-            </div>
-            @Html.ActionLink("Thêm vào giỏ hàng", "ThemGioHang", "Order", new { id = book.ID_Book, strUrl = Request.Url.ToString() }, null)
+            <div class="col-4 mb-5">
+                <div class="book-image">
+                    <img src="@book.Images" alt="" width=300px height=350px />
+                </div>
+                <div class="book-name mt-3">
+                    <h5>@book.Name</h5>
+                </div>
+                <div class="book-discription">
+                    Mô tả:
+                    @book.Discription
+                </div>
+                <div class="book-agelimit">
+                    Tuổi giới hạn:
+                    @book.Age_Limit
+                </div>
+                <div class="book-price">
+                    Giá:
+                    @book.Price.Value.ToString("#,##")
+                    VND
+                </div>
+                @Html.ActionLink("Thêm vào giỏ hàng", "ThemGioHang", "Order", new { id = book.ID_Book, strUrl = Request.Url.ToString() }, null)
 
-        </div>
+            </div>
         }
     </div>
 

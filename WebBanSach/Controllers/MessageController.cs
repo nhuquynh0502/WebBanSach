@@ -13,5 +13,9 @@ namespace WebBanSach.Controllers
         {
             return View();
         }
+        public ActionResult ThongBaoDatHang()
+        {
+            return View();
+        }
     }
 }

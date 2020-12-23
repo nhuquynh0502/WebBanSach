@@ -178,7 +178,7 @@ namespace WebBanSach.Controllers
             {
                 ViewBag.GioHang = GetGioHang();
                 ViewBag.Total = Total();
-                return View((Session["UserLogin"] as User).ID_User);
+                return View(Session["UserLogin"] as User);
             }
 
         }
@@ -190,7 +190,7 @@ namespace WebBanSach.Controllers
                 var id = (Session["UserLogin"] as User).ID_User;
                 _context.p_CheckOrder(id);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("ThongBaoDatHang", "Message");
 
         }
     }

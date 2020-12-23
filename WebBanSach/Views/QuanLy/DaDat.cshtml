@@ -5,16 +5,17 @@
     WebGrid grid = new WebGrid(source: Model, rowsPerPage: 10);
 }
 <link rel="stylesheet" href="~/Content/css/QuanLy.css">
-<h3>Quản lý đơn hàng</h3>
-
-<ul class="nav nav-tabs">
-    <li role="presentation" class="active"><a href="@Url.Action("DaDat","QuanLy")">Đã đặt hàng</a></li>
-    <li role="presentation"><a href="@Url.Action("DaGiao","QuanLy")">Đã giao hàng</a></li>
-    <li role="presentation"><a href="@Url.Action("DaHuy","QuanLy")">Đã hủy</a></li>
-    <li role="presentation"><a href="@Url.Action("DoiTra","QuanLy")">Đổi trả</a></li>
-</ul>
 
 <div class="container" role="alert">
+    <h3 class="d-flex flex-column align-items-center mt-4">QUẢN LÝ ĐƠN HÀNG</h3>
+
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="@Url.Action("DaDat","QuanLy")">Đã đặt hàng</a></li>
+        <li role="presentation"><a href="@Url.Action("DaGiao","QuanLy")">Đã giao hàng</a></li>
+        <li role="presentation"><a href="@Url.Action("DaHuy","QuanLy")">Đã hủy</a></li>
+        <li role="presentation"><a href="@Url.Action("DoiTra","QuanLy")">Đổi trả</a></li>
+    </ul>
+
     @grid.GetHtml(
         tableStyle: "gridTable",
         headerStyle: "gridHeard",
