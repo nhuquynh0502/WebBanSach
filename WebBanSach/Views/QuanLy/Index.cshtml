@@ -27,7 +27,7 @@
                         <tr>
                             <td>@i.Id @Html.Hidden("Id", i.Id)</td>
                             <td>@i.Name</td>
-                            <td><img src="@Url.Content("~/Content/images/"+ i.Image)" style="width:60px;height:90px;" /></td>
+                            <td><img src="@Url.Content(i.Image)" style="width:60px;height:90px;" /></td>
                             <td>@Html.TextBox("Quantity", i.Quantity) @Html.Hidden("OldQuantity", old)</td>
                             <td>@i.Price.ToString("#,##")</td>
                             <td>@i.Total.ToString("#,##")</td>

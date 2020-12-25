@@ -8,16 +8,16 @@
     <h2 class="mb-4">ĐĂNG KÝ</h2>
 
     <form action="/Home/DangKy" method="post" style="width:500px">
-        @*@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+        @if (!string.IsNullOrEmpty(ViewBag.mess))
         {
             <div class="form-group form-row">
                 <div class="col-12 alert alert-danger">
                     <div class="col-12">
-                        @ViewBag.ErrorMessage
+                        @ViewBag.mess
                     </div>
                 </div>
             </div>
-        }*@
+        }
         <div class="form-group form-row">
             <label>Họ</label>
             <input type="text" value="" placeholder="Họ" class="form-control" name="Fisrt_Name" />

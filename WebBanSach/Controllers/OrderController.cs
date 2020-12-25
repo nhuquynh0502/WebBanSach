@@ -178,7 +178,8 @@ namespace WebBanSach.Controllers
             {
                 ViewBag.GioHang = GetGioHang();
                 ViewBag.Total = Total();
-                return View(Session["UserLogin"] as User);
+                var data = Session["UserLogin"] as User;
+                return View(data);
             }
 
         }

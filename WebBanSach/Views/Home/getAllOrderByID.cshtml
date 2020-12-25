@@ -1,0 +1,26 @@
+﻿@model List<WebBanSach.Order>
+@{
+    ViewBag.Title = "getAllOrderByID";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 10);
+    List<string> lstStatus = new List<string> { "Hủy", "Đã đặt hàng", "Đã giao hàng", "Đổi trả" };
+}
+<div class="container" role="alert">
+    <h2 class="d-flex flex-column align-items-center mt-4 mb-3">TẤT CẢ ĐƠN HÀNG</h2>
+    <link rel="stylesheet" href="~/Content/css/QuanLy.css">
+    @grid.GetHtml(
+            tableStyle: "gridTable",
+            headerStyle: "gridHeard",
+            footerStyle: "gridFooter",
+            rowStyle: "gridRow",
+            alternatingRowStyle: "gridAltRow",
+            columns: grid.Columns(
+                grid.Column("ID_Order", header: "Mã đơn hàng"),
+                grid.Column("ID_User", header: "Mã khách hàng"),
+                grid.Column("Order_Date", header: "Ngày đặt hàng"),
+                grid.Column("Delivery_Date", header: "Ngày đặt hàng"),
+                grid.Column("Tình trạng đơn hàng", format: p => lstStatus[(int)p.Order_Status]),
+                grid.Column("Puschase", header: "Thanh toán")
+            )
+        )
+</div>

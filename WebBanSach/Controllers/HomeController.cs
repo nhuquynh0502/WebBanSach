@@ -52,7 +52,6 @@ namespace WebBanSach.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult TrangQuanLySach()
         {
-            
             try
             {
                 var data = webBanSach.HienThiThongTinSach1().ToList();
@@ -60,22 +59,50 @@ namespace WebBanSach.Controllers
             }
             catch
             {
-                return View("TrangQuanLySach");
+                return View();
             }
         }
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
-        public ActionResult TrangQuanLySach(string chuoi)
+        public ActionResult TimKiemAdmin(string chuoi)
         {
             try
             {
                 var data = webBanSach.TimKiemThongTin1(chuoi).ToList();
                 ViewBag.value = chuoi;
-                return View(data);
+                return View("TrangQuanLySach", data);
             }
             catch
             {
                 return View("TrangQuanLySach");
+            }
+        }
+        [HttpPost]
+        public ActionResult TimKiemUser(string chuoi)
+        {
+            try
+            {
+                var data = webBanSach.TimKiemThongTin1(chuoi).ToList();
+                ViewBag.value = chuoi;
+                return View("TrangNguoiDung", data);
+            }
+            catch
+            {
+                return View("TrangNguoiDung");
+            }
+        }
+        [HttpPost]
+        public ActionResult TimKiemTrangChu(string chuoi)
+        {
+            try
+            {
+                var data = webBanSach.TimKiemThongTin1(chuoi).ToList();
+                ViewBag.value = chuoi;
+                return View("Index", data);
+            }
+            catch
+            {
+                return View("Index");
             }
         }
         public ViewResult TrangSachKinhDi()
@@ -200,7 +227,10 @@ namespace WebBanSach.Controllers
         [HttpPost]
         public ActionResult DangKy(User user)
         {
-            webBanSach.adduser1(
+            var u = webBanSach.Users.SingleOrDefault(x => x.UserName == user.UserName);
+            if (u == null)
+            {
+                webBanSach.adduser1(
                                 user.First_Name,
                                 user.Last_Name,
                                 user.DoB,
@@ -211,7 +241,13 @@ namespace WebBanSach.Controllers
                                 user.UserName,
                                 user.PassWd
                                 );
-            return RedirectToAction("DangNhap");
+                return RedirectToAction("DangNhap");
+            }
+            else
+            {
+                ViewBag.mess = "Tài khoản đã tồn tại!!!";
+                return View();
+            }
         }
         public ActionResult DangNhap()
         {
@@ -220,7 +256,7 @@ namespace WebBanSach.Controllers
         [HttpPost]
         public ActionResult DangNhap(User user)
         {
-            var data = webBanSach.LayUser(user.UserName, user.PassWd).FirstOrDefault();
+            var data = webBanSach.LayUser1(user.UserName, user.PassWd).FirstOrDefault();
             if(data == null)
             {
                 return View();
@@ -232,9 +268,8 @@ namespace WebBanSach.Controllers
                     FormsAuthentication.SignOut();
                 }
 
-                //FormsAuthentication.SignOut();
                 FormsAuthentication.SetAuthCookie(data.ID_User.ToString(), true);
-                Session["UserLogin"] = new User { ID_User = data.ID_User};
+                Session["UserLogin"] = data;
                 var quyen = webBanSach.LayQuyenUser(data.ID_User).ToList().FirstOrDefault();
                 if(quyen == 1)
                 {
@@ -246,6 +281,16 @@ namespace WebBanSach.Controllers
                 }
                 return View();
             }
+        }
+        public ActionResult getAllOrderByID()
+        {
+            int id = (Session["UserLogin"] as User).ID_User;
+            using (var _context = new WebBanSachEntities())
+            {
+                var lstOrder = _context.Orders.Where(n => n.ID_User == id).ToList();
+                return View(lstOrder);
+            }
+            
         }
     }
 }

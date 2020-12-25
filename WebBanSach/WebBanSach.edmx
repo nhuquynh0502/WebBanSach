@@ -834,6 +834,10 @@ warning 6002: The table/view 'WebBanSach.dbo.ViewModel' does not have a primary 
           <FunctionImport Name="p_HienThiSachTrinhTham" ReturnType="Collection(WebBanSachModel.p_HienThiSachTrinhTham_Result)" />
           <FunctionImport Name="p_HienThiSachKinhDi1" EntitySet="Books" ReturnType="Collection(WebBanSachModel.Book)" />
           <FunctionImport Name="p_HienThiSachTrinhTham1" EntitySet="Books" ReturnType="Collection(WebBanSachModel.Book)" />
+          <FunctionImport Name="LayUser1" EntitySet="Users" ReturnType="Collection(WebBanSachModel.User)">
+            <Parameter Name="userName" Mode="In" Type="String" />
+            <Parameter Name="pass" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="adduser1_Result">
           <Property Type="Int32" Name="ID_User" Nullable="false" />
@@ -1399,6 +1403,7 @@ warning 6002: The table/view 'WebBanSach.dbo.ViewModel' does not have a primary 
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="p_HienThiSachKinhDi1" FunctionName="WebBanSachModel.Store.p_HienThiSachKinhDi" />
           <FunctionImportMapping FunctionImportName="p_HienThiSachTrinhTham1" FunctionName="WebBanSachModel.Store.p_HienThiSachTrinhTham" />
+          <FunctionImportMapping FunctionImportName="LayUser1" FunctionName="WebBanSachModel.Store.LayUser" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

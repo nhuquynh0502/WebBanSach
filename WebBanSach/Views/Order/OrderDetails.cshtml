@@ -6,7 +6,7 @@
 }
 
 <div class="container" role="alert">
-    <h3>Thông tin khách hàng</h3>
+    <h3 class="text-center my-3">THÔNG TIN KHÁCH HÀNG</h3>
     <div class="info">
         <h5>Họ: @Model.Last_Name</h5>
         <h5>Tên: @Model.First_Name</h5>
@@ -14,9 +14,9 @@
         <h5>Địa chỉ: @Model.Address</h5>
         <h5>Ngày đặt: @DateTime.Now.Date.ToString("dd/MM/yyyy")</h5>
         <h5>Ngày giao: 3-5 ngày làm việc</h5>
-        <h5>Tổng tiền thanh toán: @(((int)@ViewBag.Total).ToString("#,##"))</h5>
+        <h5>Tổng tiền thanh toán: @(((int)@ViewBag.Total).ToString("#,##")) VND</h5>
     </div>
-    <h3>Chi tiết đơn hàng</h3>
+    <h3 class="text-center mt-4 mb-3">CHI TIẾT ĐƠN HÀNG</h3>
     <table class="table">
         <thead>
             <tr class="font-weight-bold">
